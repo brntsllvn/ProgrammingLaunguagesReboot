@@ -53,26 +53,7 @@ fun number_in_month(dates : (int * int * int) list, month : int) : int =
 	  val end_prev_month = end_of_previous_month(date)
 	  val date_befor_beg_next_month = is_older(date,beg_next_month)
 	  val date_after_end_prev_month = is_older(end_prev_month,date)
-      in
-	  (*
-	  print ("----------" ^ "\n");
-	  print (Int.toString(#1 date) ^ " " ^
-		 Int.toString(#2 date) ^ " " ^
-		 Int.toString(#3 date) ^ " " ^
-		 "\n");
-	  print (Int.toString(#1 end_prev_month) ^ " " ^
-		 Int.toString(#2 end_prev_month) ^ " " ^
-		 Int.toString(#3 end_prev_month) ^ " " ^
-		 "\n");
-	  print (Int.toString(#1 beg_next_month) ^ " " ^
-		 Int.toString(#2 beg_next_month) ^ " " ^
-		 Int.toString(#3 beg_next_month) ^ " " ^
-		 "\n");
-
-	  print (Bool.toString(date_befor_beg_next_month) ^ "\n");
-	  print (Bool.toString(date_after_end_prev_month) ^ "\n");
-	  *)
-	  
+      in	  
 	  if date_befor_beg_next_month andalso date_after_end_prev_month
 	  then 1 + number_in_month(tl dates,month)
 	  else number_in_month(tl dates,month)
