@@ -18,14 +18,27 @@ val is_older_7 = is_older ((1999,12,31),(1999,11,31)) = false
 (* day *)						    
 val is_older_8 = is_older ((1999,12,31),(1999,12,31)) = false
 val is_older_9 = is_older ((1999,12,10),(1999,12,31)) = true
-val is_older_a = is_older ((1999,12,31),(1999,12,10)) = false																		    
-										
+val is_older_a = is_older ((1999,12,31),(1999,12,10)) = false
 
+val number_in_month_0 = number_in_month ([],1) = 0
 
-					     
-(*
+val number_in_month_1 = number_in_month ([(1999,1,1)],1) = 1
+val number_in_month_2 = number_in_month ([(1998,12,31)],1) = 0
+val number_in_month_3 = number_in_month ([(1999,2,1)],1) = 0
+							    
+val number_in_month_4 = number_in_month ([(1999,1,1),(1999,1,1)],1) = 2
+val number_in_month_5 = number_in_month ([(1998,12,31),(1999,2,1)],1) = 0
+val number_in_month_6 = number_in_month ([(1998,1,31),(1999,2,1)],1) = 1
+val number_in_month_7 = number_in_month ([(1776,1,31),(1999,1,1)],1) = 2
+
+val number_in_month_8 = number_in_month ([(1999,1,1),(1776,1,1),(1986,1,1)],1) = 3
+val number_in_month_9 = number_in_month ([(1999,12,31),(1999,2,1),(1999,1,1)],1) = 1										     		   
 val test2 = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1
 
+
+
+
+								(*
 val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3
 
 val test4 = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012,2,28)]
