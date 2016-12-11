@@ -5,8 +5,25 @@
 
 use "hw1.sml";
 
-val test1 = is_older ((1,2,3),(2,3,4)) = true
+val is_older_0 = is_older ((1,1,1),(1,1,1)) = false
+val is_older_1 = is_older ((1,2,3),(2,3,4)) = true
+(* year *)
+val is_older_2 = is_older ((1999,12,31),(1999,12,31)) = false
+val is_older_3 = is_older ((1999,12,31),(2000,12,31)) = true		  
+val is_older_4 = is_older ((2000,12,31),(1999,12,31)) = false
+(* month *)							    
+val is_older_5 = is_older ((1999,12,31),(1999,12,31)) = false
+val is_older_6 = is_older ((1999,11,31),(1999,12,31)) = true
+val is_older_7 = is_older ((1999,12,31),(1999,11,31)) = false
+(* day *)						    
+val is_older_8 = is_older ((1999,12,31),(1999,12,31)) = false
+val is_older_9 = is_older ((1999,12,10),(1999,12,31)) = true
+val is_older_a = is_older ((1999,12,31),(1999,12,10)) = false																		    
+										
 
+
+					     
+(*
 val test2 = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1
 
 val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3
@@ -26,3 +43,4 @@ val test9 = what_month 70 = 3
 val test10 = month_range (31, 34) = [1,2,2,2]
 
 val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
+*)
