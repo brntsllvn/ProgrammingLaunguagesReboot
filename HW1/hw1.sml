@@ -82,17 +82,6 @@ fun oldest(dates : (int*int*int) list) =
 		val tl_ans = oldest_nonempty(tl dates)
 		val head = hd dates
 	    in
-		(*
-		print ("----------" ^ "\n");
-		print (Int.toString(#1 head) ^ " " ^
- 		       Int.toString(#2 head) ^ " " ^
- 		       Int.toString(#3 head) ^ " " ^
- 		       "\n");
-		print (Int.toString(#1 tl_ans) ^ " " ^
- 		       Int.toString(#2 tl_ans) ^ " " ^
- 		       Int.toString(#3 tl_ans) ^ " " ^
- 		       "\n");
-		*)
 		if is_older(head,tl_ans)
 		then head
 		else tl_ans
