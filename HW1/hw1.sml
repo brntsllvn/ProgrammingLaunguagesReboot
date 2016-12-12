@@ -67,4 +67,36 @@ fun number_in_month(dates : (int * int * int) list, month : int) : int =
 fun number_in_months(dates : (int*int*int) list, months : int list) : int =
   if null dates orelse null months then 0 else
   number_in_month(dates,hd months) + number_in_months(dates,tl months)
+
+(*-----*)
+(* #11 *)
+(*-----*)						     
   
+fun oldest(dates : (int*int*int) list) =
+  if null dates then NONE else
+  let
+      fun oldest_nonempty(dates : (int*int*int) list) =
+	if null(tl dates) then hd dates
+	else
+	    let
+		val tl_ans = oldest_nonempty(tl dates)
+		val head = hd dates
+	    in
+		(*
+		print ("----------" ^ "\n");
+		print (Int.toString(#1 head) ^ " " ^
+ 		       Int.toString(#2 head) ^ " " ^
+ 		       Int.toString(#3 head) ^ " " ^
+ 		       "\n");
+		print (Int.toString(#1 tl_ans) ^ " " ^
+ 		       Int.toString(#2 tl_ans) ^ " " ^
+ 		       Int.toString(#3 tl_ans) ^ " " ^
+ 		       "\n");
+		*)
+		if is_older(head,tl_ans)
+		then head
+		else tl_ans
+	    end		
+  in
+      SOME(oldest_nonempty(dates))
+  end

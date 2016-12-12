@@ -47,21 +47,12 @@ val number_in_months_5 = number_in_months([(1999,1,31),(1999,2,31)],[4,5]) = 0
 								   
 val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3
 
+val oldest_0 = oldest([]) =  NONE
+val oldest_1 = oldest([(1999,12,31)]) = SOME (1999,12,31)
+val oldest_2 = oldest([(1999,12,31),(2016,12,11)]) = SOME (1999,12,31)
 
-											   (*
-val test4 = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012,2,28)]
-
-val test5 = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)]
-
-val test6 = get_nth (["hi", "there", "how", "are", "you"], 2) = "there"
-
-val test7 = date_to_string (2013, 6, 1) = "June 1, 2013"
-
-val test8 = number_before_reaching_sum (10, [1,2,3,4,5]) = 3
-
-val test9 = what_month 70 = 3
-
-val test10 = month_range (31, 34) = [1,2,2,2]
-
+val oldest_3 = oldest([(2016,12,11),(1999,12,31)]) = SOME (1999,12,31)
+val oldest_4 = oldest([(2016,12,11),(1999,12,31),(2000,1,1)]) = SOME (1999,12,31)
+					     		  
 val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28)]) = SOME (2011,3,31)
-*)
+				
