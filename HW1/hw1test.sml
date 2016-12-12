@@ -36,11 +36,19 @@ val number_in_month_9 = number_in_month ([(1999,12,31),(1999,2,1),(1999,1,1)],1)
 val test2 = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1
 
 
+val number_in_months_0 = number_in_months([],[]) = 0
 
+val number_in_months_1 = number_in_months([(1999,1,31)],[1]) = 1
+val number_in_months_2 = number_in_months([(1999,2,31)],[1]) = 0
 
-								(*
+val number_in_months_3 = number_in_months([(1999,2,31)],[1,2]) = 1
+val number_in_months_4 = number_in_months([(1999,1,31),(1999,2,31)],[1,2]) = 2
+val number_in_months_5 = number_in_months([(1999,1,31),(1999,2,31)],[4,5]) = 0
+								   
 val test3 = number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = 3
 
+
+											   (*
 val test4 = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012,2,28)]
 
 val test5 = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)]
