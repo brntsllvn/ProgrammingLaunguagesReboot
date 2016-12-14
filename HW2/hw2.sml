@@ -4,8 +4,10 @@ fun same_string(s1 : string, s2 : string) = s1 = s2
 (*---------------------------------------*)
 (* put your solutions for problem 1 here *)
 (*---------------------------------------*)
-						     
+
+(*-----*)
 (* (a) *)
+(*-----*)
 fun all_except_option(str,strLst) =
   let
       fun aux(strLst,acc) =
@@ -21,17 +23,30 @@ fun all_except_option(str,strLst) =
       in
       case strLst of
 	  [] => NONE		    
-	| head::tail => if listContainsStr
-			then SOME(auxResult)
-			else NONE	  
+	| _ => if listContainsStr then SOME(auxResult) else NONE	  
       end
   end						     
-						     
 
-(*
-						     
+      
+(*-----*)
+(* (b) *)
+(*-----*)
+fun get_substitutions1(strLstLst,name) =
+  case strLstLst of
+      [] => []
+    | head::tail => case all_except_option(name, head) of
+			NONE => get_substitutions1(tail,name)
+		     | SOME(x) => x @ get_substitutions1(tail,name)
+			    
+
+
+
+    
+      
+      (*
+
 (* you may assume that Num is always used with values 2, 3, ..., 10
-   though it will not really come up *)
+though it will not really come up *)
 datatype suit = Clubs | Diamonds | Hearts | Spades
 datatype rank = Jack | Queen | King | Ace | Num of int 
 type card = suit * rank

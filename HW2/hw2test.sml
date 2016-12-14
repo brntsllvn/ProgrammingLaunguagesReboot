@@ -8,4 +8,11 @@ val a4 = all_except_option("hi",["po","go"]) = NONE
 val a5 = all_except_option("hi",["po","hi"]) = SOME(["po"])
 val a6 = all_except_option("hi",["po","hi","be"]) = SOME(["be","po"])
 val a7 = all_except_option("hi",["hi","po","be"]) = SOME(["be","po"]) 
-val a8 = all_except_option("hi",["si","po","be"]) = NONE							
+val a8 = all_except_option("hi",["si","po","be"]) = NONE;
+
+print("-----------------------" ^ "\n");
+							
+val b0 = get_substitutions1([],"B") = []
+val b1 = get_substitutions1([[]],"B") = []
+val b2 = get_substitutions1([["B"]],"B") = []
+val b3 = get_substitutions1([["B","Brent"]],"B") = ["Brent"]
