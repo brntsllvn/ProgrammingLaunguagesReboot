@@ -19,8 +19,6 @@ fun all_except_option(str,strLst) =
 	  val auxResult = aux(strLst,[])
 	  val listContainsStr = length auxResult <> length strLst
       in
-	  print(Bool.toString(listContainsStr) ^ "\n");
-	  print(String.concatWith "," auxResult);
       case strLst of
 	  [] => NONE		    
 	| head::tail => if listContainsStr
