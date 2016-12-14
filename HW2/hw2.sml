@@ -6,14 +6,28 @@ fun same_string(s1 : string, s2 : string) = s1 = s2
 (*---------------------------------------*)
 						     
 (* (a) *)
-fun all_except_option(strToRemove, strList) =
-  case strList of
-      [] => NONE
-    | head::remaining => if same_string(strToRemove,head)
-			 then SOME([])
-			 else NONE
-      
-						     
+fun all_except_option(str,strLst) =
+  let
+      fun aux(strLst,acc) =
+	case strLst of
+	    [] => acc
+	  | head::tail => if same_string(str,head)
+			  then aux(tail,acc)
+			  else aux(tail,head::acc)
+  in
+      let
+	  val auxResult = aux(strLst,[])
+	  val listContainsStr = length auxResult <> length strLst
+      in
+	  print(Bool.toString(listContainsStr) ^ "\n");
+	  print(String.concatWith "," auxResult);
+      case strLst of
+	  [] => NONE		    
+	| head::tail => if listContainsStr
+			then SOME(auxResult)
+			else NONE	  
+      end
+  end						     
 						     
 
 (*
