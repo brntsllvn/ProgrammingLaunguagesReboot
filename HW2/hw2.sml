@@ -37,8 +37,22 @@ fun get_substitutions1(strLstLst,name) =
     | head::tail => case all_except_option(name, head) of
 			NONE => get_substitutions1(tail,name)
 		     | SOME(x) => x @ get_substitutions1(tail,name)
-			    
 
+(*-----*)
+(* (c) *)
+(*-----*)							
+fun get_substitutions2(strLstLst,name) =
+  let
+      fun aux(strLstLst,acc) =
+	case strLstLst of
+	    [] => acc
+	  | head::tail => case all_except_option(name, head) of
+			      NONE => aux(tail,acc)
+			    | SOME([]) => aux(tail,acc) 
+			    | SOME([x]) => aux(tail,x::acc)
+  in
+      aux(strLstLst,[]) 
+  end
 
 
     

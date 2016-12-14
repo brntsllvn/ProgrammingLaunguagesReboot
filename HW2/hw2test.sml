@@ -16,3 +16,13 @@ val b0 = get_substitutions1([],"B") = []
 val b1 = get_substitutions1([[]],"B") = []
 val b2 = get_substitutions1([["B"]],"B") = []
 val b3 = get_substitutions1([["B","Brent"]],"B") = ["Brent"]
+val b4 = get_substitutions1([["B","Brent"],["ace","dog"],["Brnt","B"]],"B") = ["Brent","Brnt"];
+
+print("-----------------------" ^ "\n");
+
+val c0 = get_substitutions2([],"B") = []
+val c1 = get_substitutions2([[]],"B") = []
+val c2 = get_substitutions2([["B"]],"B") = []
+val c3 = get_substitutions2([["B","Brent"]],"B") = ["Brent"]
+val c4 = get_substitutions2([["B","Brent"],["ace","dog"],["Brnt","B"]],"B") = ["Brnt","Brent"]
+										  
