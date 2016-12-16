@@ -47,7 +47,7 @@ val d7 = similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fr
 {first="Fred", middle="W", last="Smith"}) = [{first="Fred", last="Smith", middle="W"},
 {first="Fredrick", last="Smith", middle="W"},
 {first="Freddie", last="Smith", middle="W"},
-{first="F", last="Smith", middle="W"}]
+{first="F", last="Smith", middle="W"}];
 
 
 print("-------------------------------" ^ "\n");
@@ -71,4 +71,11 @@ val b25 = card_value(Hearts,Queen) = 10;
 
 print("-------------------------------" ^ "\n");
 
-val c20 = remove_card([],(Jack,Num 2)) = List.Empty
+exception SomeException
+val myJack = (Spades,Jack)
+val c20 = remove_card([],myJack,SomeException) = []
+val c21 = remove_card([myJack],myJack,SomeException) = []
+val c22 = remove_card([myJack,(Hearts,King)],myJack,SomeException) = [(Hearts,King)]
+val c23 = remove_card([myJack,myJack],myJack,SomeException) = [myJack]
+val c24 = remove_card([(Hearts,King)],myJack,SomeException) = []
+val c25 = remove_card([myJack,(Hearts,Ace),(Spades,Ace)],myJack,SomeException) = [(Hearts,Ace),(Spades,Ace)]

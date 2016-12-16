@@ -107,10 +107,24 @@ fun card_value(someCard) =
 (*-----*)
 exception MyExceptionForStuffs
 		       
-fun remove_card(cards,cardToRemove) =
-  case cards of
-      [] => raise List.Empty
-    | _ => [] 
+fun remove_card(cards,cardToRemove,ex) =
+  let
+      fun aux(cards,cardToRemove) =
+	case cards of  
+	    [] => []
+	  | head::tail => if head = cardToRemove
+			  then tail
+			  else head :: remove_card(tail,cardToRemove,ex)
+      val result = aux(cards,cardToRemove)
+  in
+      case result of
+	  [] => raise ex
+	| _ => if length result = length cards
+	       then raise ex
+	       else result
+  end
+      
+
 
 		       
 		     
