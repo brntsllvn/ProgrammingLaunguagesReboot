@@ -83,7 +83,7 @@ val c25 = remove_card([myJack,(Hearts,Ace),(Spades,Ace)],myJack,SomeException) =
 *)
 val blkJack = (Spades,Jack)
 val redKing = (Hearts,King)
-val d20 = all_same_color([]) = false
+val d20 = all_same_color([]) = true
 val d21 = all_same_color([blkJack]) = true
 val d22 = all_same_color([blkJack,blkJack]) = true
 val d23 = all_same_color([blkJack,redKing]) = false
@@ -124,6 +124,13 @@ val f6 = score([sBlkKng,sRedJck],20) = 0
 val f7 = score([sRedFiv,sRedQen,sRedJck],0) = 37
 val f8 = score([sRedFiv,sRedQen,sRedJck],25) = 0
 val f9 = score([sRedFiv,sRedQen,sBlkTwo],0) = 51;
+val f10 = score([(Hearts,Num 2),(Clubs,Num 4)],10) = 4;
 
 print("-------------------------------" ^ "\n");
 
+val 
+
+(* deck, moves, goal *)
+val g0 = officiate([],[],0) = 0
+val g1 = officiate([(Spades,King)],[],0) = 0
+val g2 = officiate([(Spades,King)],[Draw],0) =  

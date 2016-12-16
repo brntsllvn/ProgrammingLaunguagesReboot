@@ -75,7 +75,6 @@ fun similar_names(strLstLst,{first=fir,middle=mid,last=las}) =
 datatype suit = Clubs | Diamonds | Hearts | Spades
 datatype rank = Jack | Queen | King | Ace | Num of int 
 type card = suit * rank
-
 datatype color = Red | Black
 datatype move = Discard of card | Draw 
 
@@ -129,7 +128,7 @@ fun remove_card(cards,cardToRemove,ex) =
 (*-----*)      
 fun all_same_color(cards) =
   case cards of
-      [] => false
+      [] => true
     | _::[] => true 
     | head::(neck::rest) =>
       (card_color(head) = card_color(neck) andalso all_same_color(neck::rest))
@@ -163,7 +162,25 @@ fun score(heldCards,goal) =
   in
       final_score
   end
-      
 
+(*-----*)
+(* (g) *)
+(*-----*)
+
+(*      
+fun officiate(cards,moves,goal) =
+  let
+      fun draw_card(cardToDraw,heldCards) = 
+  in
+
+  end
+  
+  case cards of
+      [] => 0
+    | _ => case moves of
+	       [] => 0
+	     | _ => 1 
+      
+*)
 
 	      
