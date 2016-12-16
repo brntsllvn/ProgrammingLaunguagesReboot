@@ -131,8 +131,8 @@ fun all_same_color(cards) =
   case cards of
       [] => false
     | _::[] => true 
-    | (headSuit,headRank)::((neckSuit,neckRank)::rest) =>
-      (headSuit = neckSuit andalso all_same_color((neckSuit,neckRank)::rest))
+    | head::(neck::rest) =>
+      (card_color(head) = card_color(neck) andalso all_same_color(neck::rest))
 
 (*-----*)
 (* (e) *)
@@ -147,6 +147,23 @@ fun sum_cards(cards) =
   in
       aux_sum(cards,0)
   end
-		     
+
+(*-----*)
+(* (f) *)
+(*-----*)
+fun score(heldCards,goal) =
+  let
+      val card_sum = sum_cards(heldCards)
+      val preliminary_score = if card_sum > goal
+			      then 3*(card_sum - goal)
+			      else goal - card_sum
+      val final_score = if all_same_color(heldCards)
+			then preliminary_score div 2
+			else preliminary_score
+  in
+      final_score
+  end
+      
+
 
 	      

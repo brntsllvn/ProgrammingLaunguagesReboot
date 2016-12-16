@@ -88,7 +88,12 @@ val d21 = all_same_color([blkJack]) = true
 val d22 = all_same_color([blkJack,blkJack]) = true
 val d23 = all_same_color([blkJack,redKing]) = false
 val d24 = all_same_color([blkJack,blkJack,blkJack]) = true
-val d25 = all_same_color([blkJack,redKing,redKing,blkJack,blkJack]) = false;							  
+val d25 = all_same_color([blkJack,redKing,redKing,blkJack,blkJack]) = false
+val d26 = all_same_color([redKing,redKing]) = true
+val d27 = all_same_color([(Diamonds,Num 5)]) = true;
+val d28 = all_same_color([(Diamonds,Num 5),(Hearts,Queen)]) = true;
+val d29 = all_same_color([(Diamonds,Num 5),(Hearts,Queen),redKing]) = true;
+
 print("-------------------------------" ^ "\n");
 
 val myAce = (Spades,Ace)
@@ -98,4 +103,27 @@ val myTwo = (Spades,Num 2)
 val e20 = sum_cards([]) = 0
 val e21 = sum_cards([myAce]) = 11
 val e22 = sum_cards([myAce,myAce]) = 22
-val e23 = sum_cards([myAce,myQueen,myTwo,myKing]) = 33 
+val e23 = sum_cards([myAce,myQueen,myTwo,myKing]) = 33;
+
+print("-------------------------------" ^ "\n");
+
+val sBlkAce = (Spades,Ace)
+val sBlkKng = (Clubs,King)
+val sBlkTwo = (Spades,Num 2)
+val sRedJck = (Hearts,Jack)
+val sRedFiv = (Diamonds,Num 5)
+val sRedQen = (Hearts,Queen)
+
+val f0 = score([],0) = 0
+val f1 = score([sBlkAce],0) = 16
+val f2 = score([sBlkAce],12) = 0
+val f3 = score([sBlkAce,sBlkTwo],0) = 19
+val f4 = score([sBlkAce,sBlkTwo],13) = 0
+val f5 = score([sBlkKng,sRedJck],0) = 60 
+val f6 = score([sBlkKng,sRedJck],20) = 0
+val f7 = score([sRedFiv,sRedQen,sRedJck],0) = 37
+val f8 = score([sRedFiv,sRedQen,sRedJck],25) = 0
+val f9 = score([sRedFiv,sRedQen,sBlkTwo],0) = 51;
+
+print("-------------------------------" ^ "\n");
+
