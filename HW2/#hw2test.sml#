@@ -20,6 +20,7 @@ val b4 = get_substitutions1([["B","Brent"],["ace","dog"],["Brnt","B"]],"B") = ["
 val b5 = get_substitutions1([["B"],["ace"]],"B") = [];
 val b6 = get_substitutions1([["B","Brent","bert","bill"]],"B") = ["bill","bert","Brent"];
 
+
 print("-----------------------" ^ "\n");
 
 val c0 = get_substitutions2([],"B") = []

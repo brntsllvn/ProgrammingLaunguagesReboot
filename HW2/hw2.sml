@@ -100,7 +100,19 @@ fun card_value(someCard) =
     | (_,King) => 10
     | (_,Queen) => 10
     | (_,Ace) => 11 
-    | (_,Num x) => x  
+    | (_,Num x) => x
+
+(*-----*)
+(* (c) *)
+(*-----*)
+exception MyExceptionForStuffs
+		       
+fun remove_card(cards,cardToRemove) =
+  case cards of
+      [] => raise List.Empty
+    | _ => [] 
+
+		       
 		     
 
 	      
