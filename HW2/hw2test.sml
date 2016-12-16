@@ -1,5 +1,6 @@
 use "hw2.sml";
 
+(*
 val a0 = all_except_option("hi",[]) = NONE
 val a1 = all_except_option("hi",["hi"]) = SOME([])
 val a2 = all_except_option("hi",["po"]) = NONE
@@ -48,3 +49,23 @@ val d7 = similar_names([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fr
 {first="Fredrick", last="Smith", middle="W"},
 {first="Freddie", last="Smith", middle="W"},
 {first="F", last="Smith", middle="W"}]
+*)
+
+print("-------------------------------" ^ "\n");
+print("Problem 2----------------------" ^ "\n");
+print("-------------------------------" ^ "\n");
+
+val a20 = card_color(Clubs,Jack) = Black
+val a21 = card_color(Hearts,Jack) = Red
+val a22 = card_color(Diamonds,Jack) = Red
+val a23 = card_color(Spades,Jack) = Black
+val a24 = card_color(Spades,Ace) = Black;
+
+print("-------------------------------" ^ "\n");
+				       
+val b20 = card_value(Clubs,Jack) = 10
+val b21 = card_value(Clubs,Num 3) = 3
+val b22 = card_value(Diamonds,Num 8) = 8
+val b23 = card_value(Spades,Ace) = 11
+val b24 = card_value(Hearts,King) = 10
+val b25 = card_value(Hearts,Queen) = 10

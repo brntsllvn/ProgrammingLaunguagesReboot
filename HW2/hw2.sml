@@ -1,9 +1,9 @@
 
 fun same_string(s1 : string, s2 : string) = s1 = s2
 
-(*---------------------------------------*)
-(* put your solutions for problem 1 here *)
-(*---------------------------------------*)
+(*-----------*)
+(* Problem 1 *)
+(*-----------*)
 
 (*-----*)
 (* (a) *)
@@ -66,14 +66,12 @@ fun similar_names(strLstLst,{first=fir,middle=mid,last=las}) =
 	  createAlternateNames(subs)
       end
 
-
+(*-----------*)
+(* Problem 2 *)
+(*-----------*)
 			     
-    
-      
-      (*
-
-(* you may assume that Num is always used with values 2, 3, ..., 10
-though it will not really come up *)
+(* you may assume that Num is always used with values 2, 3, ..., 10 though it will not really come up *)
+	  
 datatype suit = Clubs | Diamonds | Hearts | Spades
 datatype rank = Jack | Queen | King | Ace | Num of int 
 type card = suit * rank
@@ -83,6 +81,26 @@ datatype move = Discard of card | Draw
 
 exception IllegalMove
 
-(* put your solutions for problem 2 here *)
+(*-----*)
+(* (a) *)
+(*-----*)	      
+fun card_color(someCard) =
+  case someCard of
+      (Hearts,_) => Red
+    | (Diamonds,_) => Red
+    | (Spades,_) => Black
+    | (Clubs,_) => Black 
 
-*)
+(*-----*)
+(* (b) *)
+(*-----*)		   
+fun card_value(someCard) =
+  case someCard of
+      (_,Jack) => 10
+    | (_,King) => 10
+    | (_,Queen) => 10
+    | (_,Ace) => 11 
+    | (_,Num x) => x  
+		     
+
+	      
