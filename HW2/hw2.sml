@@ -132,9 +132,21 @@ fun all_same_color(cards) =
       [] => false
     | _::[] => true 
     | (headSuit,headRank)::((neckSuit,neckRank)::rest) =>
-      (headSuit = neckSuit andalso all_same_color((neckSuit,neckRank)::rest)) 
-				
-		       
+      (headSuit = neckSuit andalso all_same_color((neckSuit,neckRank)::rest))
+
+(*-----*)
+(* (e) *)
+(*-----*)
+fun sum_cards(cards) =
+  let
+      fun aux_sum(cards,acc) =
+	case cards of
+	    [] => acc
+	  | head::[] => card_value(head)+acc  
+	  | head::tail => aux_sum(tail,card_value(head)+acc)
+  in
+      aux_sum(cards,0)
+  end
 		     
 
 	      

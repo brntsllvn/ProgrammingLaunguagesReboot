@@ -88,4 +88,14 @@ val d21 = all_same_color([blkJack]) = true
 val d22 = all_same_color([blkJack,blkJack]) = true
 val d23 = all_same_color([blkJack,redKing]) = false
 val d24 = all_same_color([blkJack,blkJack,blkJack]) = true
-val d25 = all_same_color([blkJack,redKing,redKing,blkJack,blkJack]) = false							  
+val d25 = all_same_color([blkJack,redKing,redKing,blkJack,blkJack]) = false;							  
+print("-------------------------------" ^ "\n");
+
+val myAce = (Spades,Ace)
+val myQueen = (Hearts,Queen)
+val myKing = (Diamonds,King)
+val myTwo = (Spades,Num 2)
+val e20 = sum_cards([]) = 0
+val e21 = sum_cards([myAce]) = 11
+val e22 = sum_cards([myAce,myAce]) = 22
+val e23 = sum_cards([myAce,myQueen,myTwo,myKing]) = 33 
