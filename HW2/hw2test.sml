@@ -71,6 +71,7 @@ val b25 = card_value(Hearts,Queen) = 10;
 
 print("-------------------------------" ^ "\n");
 
+(*
 exception SomeException
 val myJack = (Spades,Jack)
 val c20 = remove_card([],myJack,SomeException) = []
@@ -79,3 +80,12 @@ val c22 = remove_card([myJack,(Hearts,King)],myJack,SomeException) = [(Hearts,Ki
 val c23 = remove_card([myJack,myJack],myJack,SomeException) = [myJack]
 val c24 = remove_card([(Hearts,King)],myJack,SomeException) = []
 val c25 = remove_card([myJack,(Hearts,Ace),(Spades,Ace)],myJack,SomeException) = [(Hearts,Ace),(Spades,Ace)]
+*)
+val blkJack = (Spades,Jack)
+val redKing = (Hearts,King)
+val d20 = all_same_color([]) = false
+val d21 = all_same_color([blkJack]) = true
+val d22 = all_same_color([blkJack,blkJack]) = true
+val d23 = all_same_color([blkJack,redKing]) = false
+val d24 = all_same_color([blkJack,blkJack,blkJack]) = true
+val d25 = all_same_color([blkJack,redKing,redKing,blkJack,blkJack]) = false							  

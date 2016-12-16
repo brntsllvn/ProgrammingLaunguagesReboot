@@ -123,9 +123,17 @@ fun remove_card(cards,cardToRemove,ex) =
 	       then raise ex
 	       else result
   end
-      
 
-
+(*-----*)
+(* (d) *)
+(*-----*)      
+fun all_same_color(cards) =
+  case cards of
+      [] => false
+    | _::[] => true 
+    | (headSuit,headRank)::((neckSuit,neckRank)::rest) =>
+      (headSuit = neckSuit andalso all_same_color((neckSuit,neckRank)::rest)) 
+				
 		       
 		     
 
