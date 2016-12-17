@@ -128,9 +128,9 @@ val f10 = score([(Hearts,Num 2),(Clubs,Num 4)],10) = 4;
 
 print("-------------------------------" ^ "\n");
 
-val 
+val lstTest = [1,2,3] = [3,2,1]
 
 (* deck, moves, goal *)
 val g0 = officiate([],[],0) = 0
 val g1 = officiate([(Spades,King)],[],0) = 0
-val g2 = officiate([(Spades,King)],[Draw],0) =  
+val g2 = officiate([(Spades,King)],[Draw],0) = 0 

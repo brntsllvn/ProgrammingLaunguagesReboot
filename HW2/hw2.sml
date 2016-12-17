@@ -166,21 +166,11 @@ fun score(heldCards,goal) =
 (*-----*)
 (* (g) *)
 (*-----*)
-
-(*      
 fun officiate(cards,moves,goal) =
-  let
-      fun draw_card(cardToDraw,heldCards) = 
-  in
-
-  end
-  
   case cards of
       [] => 0
     | _ => case moves of
 	       [] => 0
-	     | _ => 1 
-      
-*)
+	     | _ => 1
 
 	      
