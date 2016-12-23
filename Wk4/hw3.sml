@@ -28,9 +28,9 @@ fun g f1 f2 p =
 	  | _                 => 0
     end
 
-(*---*)
 (*-1-*)
-(*---*)
-fun f x = Char.isUpper(String.sub(x,0))
-fun only_capitals (xs : string list) = List.filter f xs
+fun only_capitals xs = List.filter (fn x => Char.isUpper(String.sub(x,0))) xs
 
+(*-2-*)
+fun longest_string1 xs
+  = List.foldl (fn (x,y) => if String.size x > String.size y then x else y) "" xs
