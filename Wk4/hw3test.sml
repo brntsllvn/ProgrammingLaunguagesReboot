@@ -23,12 +23,17 @@ val p2_2 = longest_string1 ["b"] = "b"
 val p2_3 = longest_string1 ["b","c"] = "b"
 val p2_4 = longest_string1 ["b","cd"] = "cd"
 val p2_5 = longest_string1 ["b","cd","dc","a"] = "cd"
-val pp__ = longest_string1 ["A","bc","C"] = "bc"
+val pp__ = longest_string1 ["A","bc","C"] = "bc";
 
+print("---3---" ^ "\n");
+val p3_1 = longest_string2 [] = ""
+val p3_2 = longest_string2 ["b"] = "b"
+val p3_3 = longest_string2 ["b","c"] = "c"
+val p3_4 = longest_string2 ["b","cd"] = "cd"
+val p3_5 = longest_string2 ["b","cd","dc","a"] = "dc"
+val pp__ = longest_string2 ["A","bc","C"] = "bc"
 
-(*
-val test3 = longest_string2 ["A","bc","C"] = "bc"
-
+						 (*
 val test4a = longest_string3 ["A","bc","C"] = "bc"
 
 val test4b = longest_string4 ["A","B","C"] = "C"
