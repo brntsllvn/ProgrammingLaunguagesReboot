@@ -1,7 +1,25 @@
 use "hw3.sml";
 
-val test1 = only_capitals ["A","B","C"] = ["A","B","C"]
-
+print("---1---" ^ "\n");
+val sub1 = String.sub ("hello",0) = #"h"
+val sub2 = String.sub ("hello",1) = #"e"
+val upp1 = Char.isUpper #"h" = false
+val upp2 = Char.isUpper #"H" = true
+val sup1 = Char.isUpper(String.sub ("b",0)) = false
+val sup2 = Char.isUpper(String.sub ("B",0)) = true
+val myf1 = fn x => Char.isUpper(String.sub(x,0))
+val res1 = myf1 "B" = true
+val res2 = myf1 "b" = false
+			       
+						  
+val t1 = only_capitals [] = []
+val t2 = only_capitals ["b"] = []
+val t3 = only_capitals ["B","b"] = ["B"]
+val t4 = only_capitals ["b","b"] = []
+val tp = only_capitals ["A","B","C"] = ["A","B","C"]
+val t5 = only_capitals ["All","Bee","cee"] = ["All","Bee"]
+					   
+(*					      
 val test2 = longest_string1 ["A","bc","C"] = "bc"
 
 val test3 = longest_string2 ["A","bc","C"] = "bc"
@@ -29,3 +47,4 @@ val test10 = check_pat (Variable("x")) = true
 val test11 = match (Const(1), UnitP) = NONE
 
 val test12 = first_match Unit [UnitP] = SOME []
+*)

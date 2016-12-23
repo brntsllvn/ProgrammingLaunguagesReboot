@@ -31,6 +31,6 @@ fun g f1 f2 p =
 (*---*)
 (*-1-*)
 (*---*)
+fun f x = Char.isUpper(String.sub(x,0))
+fun only_capitals (xs : string list) = List.filter f xs
 
-
-	
