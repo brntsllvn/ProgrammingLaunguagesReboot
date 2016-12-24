@@ -31,9 +31,25 @@ val p3_2 = longest_string2 ["b"] = "b"
 val p3_3 = longest_string2 ["b","c"] = "c"
 val p3_4 = longest_string2 ["b","cd"] = "cd"
 val p3_5 = longest_string2 ["b","cd","dc","a"] = "dc"
-val pp__ = longest_string2 ["A","bc","C"] = "bc"
+val pp__ = longest_string2 ["A","bc","C"] = "bc";
 
-						 (*
+print("---4---" ^ "\n");
+(*
+val ls3 = longest_string3
+val ls4 = longest_string4
+val p4_1 = longest_string_helper ls3 [] = ""
+val p4_2 = longest_string_helper ls3 ["b"] = "b"
+*)
+
+print("---5---" ^ "\n");
+val p5_1 = longest_capitalized [] = ""
+val p5_2 = longest_capitalized ["b"] = ""
+val p5_3 = longest_capitalized ["B"] = "B"
+val p5_4 = longest_capitalized ["B","c"] = "B"
+val p5_5 = longest_capitalized ["B","C"] = "B"
+val p5_6 = longest_capitalized ["B","CD","Dc","A"] = "CD"
+					   
+(*
 val test4a = longest_string3 ["A","bc","C"] = "bc"
 
 val test4b = longest_string4 ["A","B","C"] = "C"
