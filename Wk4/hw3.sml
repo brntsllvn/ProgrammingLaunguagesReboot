@@ -52,4 +52,6 @@ fun longest_string_helper f xs = List.foldl f "" xs
 (*-5-*)
 fun longest_capitalized xs = (longest_string1 o only_capitals) xs
 
+(*-6-*)
+fun rev_string str = (String.implode o List.rev o String.explode) str
 					    
