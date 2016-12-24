@@ -56,12 +56,24 @@ val lr1 = List.rev [#"a",#"b"] = [#"b",#"a"]
 val p6_1 = rev_string "" = ""
 val p6_2 = rev_string "a" = "a"
 val p6_3 = rev_string "ab" = "ba"
-val p6_4 = rev_string "abc" = "cba"
+val p6_4 = rev_string "abc" = "cba";
 
+print("---7---" ^ "\n");
+(*val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) []*)
+(*val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3]*)
+val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
+
+
+print("---8---" ^ "\n");
+fun f x = if x = 1 then SOME [x] else NONE
+val p8_1 = all_answers f [] = SOME []
+val p8_2 = all_answers f [1] = SOME [1]
+val p8_3 = all_answers f [2] = NONE
+val p8_4 = all_answers f [1,2] = NONE
+val p8_5 = all_answers f [1,1] = SOME [1,1]
+val p8_6 = all_answers f [1,1,2] = NONE
 (*
 				   
-val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4
-
 val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
 
 val test9a = count_wildcards Wildcard = 1

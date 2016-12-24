@@ -55,3 +55,24 @@ fun longest_capitalized xs = (longest_string1 o only_capitals) xs
 (*-6-*)
 fun rev_string str = (String.implode o List.rev o String.explode) str
 					    
+(*-7-*)
+fun first_answer f xs =
+  case xs of
+      [] => raise NoAnswer
+    | x::xs' => case f x of
+		    NONE => first_answer f xs'
+		  | SOME x => x 
+
+(*-8-*)
+fun all_answers f xs =
+  let
+      fun end_or_append xs acc =
+	case xs of
+	    [] => acc
+	  | x::xs' => case f x of
+			  NONE => acc
+			| SOME [x] => [x] @ end_or_append xs' acc
+      val result = end_or_append xs []
+  in
+      if length result <> length xs then NONE else SOME result
+  end
