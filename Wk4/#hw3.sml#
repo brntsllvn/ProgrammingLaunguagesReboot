@@ -93,11 +93,10 @@ fun count_some_var(str,p) =
 (*-10-*)
 fun get_variable_strngs p =
   case p of
-      Wildcard  => []
-    | Variable x => [x]
+      Variable x => [x]
     | TupleP ps => List.foldl (fn (p,acc) => (get_variable_strngs p) @ acc) [] ps
     | ConstructorP(_,p) => get_variable_strngs p
-			| _ => [] 
+    | _ => [] 
          
 
 			       (*

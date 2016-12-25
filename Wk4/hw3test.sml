@@ -60,8 +60,8 @@ val p6_3 = rev_string "ab" = "ba"
 val p6_4 = rev_string "abc" = "cba";
 
 print("---7---" ^ "\n");
-(*val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) []*)
-(*val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3]*)
+val p7_5 = (first_answer (fn x => if x > 3 then SOME x else NONE) [] handle _ => 0) = 0; 
+val p7_5 = (first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3] handle _ => 0) = 0;
 val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
 
 print("---x---" ^ "\n");
@@ -91,6 +91,7 @@ val p9a_9 = count_wildcards (ConstructorP ("hi",Wildcard)) = 1
 val p9a_0 = count_wildcards (ConstructorP ("hi",TupleP [Wildcard])) = 1;
 
 print("---9b---" ^ "\n");
+count_wild_and_variable_lengths;
 val p9b_1 = count_wild_and_variable_lengths (Variable "a") = 1
 val p9b_2 = count_wild_and_variable_lengths (Variable "abc") = 3
 val p9b_3 = count_wild_and_variable_lengths Wildcard = 1
@@ -101,19 +102,51 @@ val p9b_7 = count_wild_and_variable_lengths (ConstructorP ("hi",Variable "abc"))
 val p9b_8 = count_wild_and_variable_lengths (ConstructorP ("hi",TupleP [Variable "abc",Wildcard])) = 4;	       
 
 print("---9c---" ^ "\n");
+count_some_var;
 val p9c_1 = count_some_var("a",Variable "a") = 1 
 val p9c_2 = count_some_var("a",Variable "b") = 0
 val p9c_3 = count_some_var("abc",Variable "abc") = 1
 val p9c_4 = count_some_var("a",TupleP [Variable "a",Variable "a"]) = 2
 val p9c_5 = count_some_var("abc",TupleP [Variable "abc",Variable "a"]) = 1
 val p9c_6 = count_some_var("abc",TupleP [TupleP [Variable "abc",Wildcard],Variable "a"]) = 1
-val p9c_7 = count_some_var("abc",TupleP [Variable "abc",ConstructorP("hi",Variable "abc")]) = 2
+val p9c_7 = count_some_var("abc",TupleP [Variable "abc",ConstructorP("hi",Variable "abc")]) = 2;
 
-									     (*
+print("---10---" ^ "\n");
+val hlp1_0 = get_variable_strngs Wildcard  = []
+val hlp1_1 = get_variable_strngs (Variable "hi") = ["hi"]
+val hlp1_2 = get_variable_strngs (TupleP [Variable "hi"]) = ["hi"]
+val hlp1_3 = get_variable_strngs (TupleP [Variable "hi",Variable "hi"]) = ["hi","hi"]
+val hlp1_4 = get_variable_strngs (TupleP [Variable "hi",TupleP [Variable "hi"]]) = ["hi","hi"]
+val hlp1_5 = get_variable_strngs (ConstructorP("abc",Variable "hi")) = ["hi"] 
+val hlp1_6 = get_variable_strngs (ConstructorP("abc",TupleP [Variable "hi"])) = ["hi"]
+val hlp1_7 = get_variable_strngs (ConstructorP("abc",TupleP [Variable "hi",ConstructorP("bye",Variable "dog")])) = ["dog","hi"]
+val hlp1_8 = get_variable_strngs UnitP = []
+val hlp1_9 = get_variable_strngs (ConstP 4) = [] 
+val hlp1_10 = get_variable_strngs (ConstructorP("abc",TupleP [(ConstP 5),ConstructorP("bye",Variable "dog")])) = ["dog"]
+val hlp1_11 = get_variable_strngs (ConstructorP("abc",TupleP [UnitP,ConstructorP("bye",Variable "dog")])) = ["dog"]														       
+(*
+check_pat;
+val p10_1 = check_pat Wildcard = true
+val p10_2 = check_pat (Variable "hi") = true
+val p10_3 = check_pat UnitP = true
+val p10_4 = check_pat (ConstP 3) = true
+val p10_5 = check_pat (ConstructorP ("hi", UnitP)) = true
+val p10_6 = check_pat (ConstructorP ("hi", Variable "hi")) = true
+val p10_7 = check_pat (TupleP [Variable "hi"]) = true
+val p10_8 = check_pat (TupleP [Variable "hi", Variable "hi"]) = false
+val p10_8 = check_pat (TupleP [Variable "hi", Variable "bye"]) = true			*)			     
 
 
-val test9c = count_some_var ("x", Variable("x")) = 1
+(*
+;
+print("---11---" ^ "\n");
+print("---12---" ^ "\n");
+val p12_1 = first_match Unit [UnitP] = SOME []
+val p12_2 = first_match (Const 2) [ConstP 2] = *) 
 
+					     
+
+(*
 val test10 = check_pat (Variable("x")) = true
 
 val test11 = match (Const(1), UnitP) = NONE
