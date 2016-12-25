@@ -4,30 +4,6 @@
 
 exception NoAnswer
 
-datatype pattern = Wildcard
-		 | Variable of string
-		 | UnitP
-		 | ConstP of int
-		 | TupleP of pattern list
-		 | ConstructorP of string * pattern
-
-datatype valu = Const of int
-	      | Unit
-	      | Tuple of valu list
-	      | Constructor of string * valu
-
-fun g f1 f2 p =
-    let 
-	val r = g f1 f2 
-    in
-	case p of
-	    Wildcard          => f1 ()
-	  | Variable x        => f2 x
-	  | TupleP ps         => List.foldl (fn (p,i) => (r p) + i) 0 ps
-	  | ConstructorP(_,p) => r p
-	  | _                 => 0
-    end
-
 (*-1-*)
 fun only_capitals xs =
   List.filter (fn x => Char.isUpper(String.sub(x,0))) xs
@@ -62,7 +38,7 @@ fun first_answer f xs =
     | x::xs' => case f x of
 		    NONE => first_answer f xs'
 		  | SOME x => x 
-
+				  
 (*-8-*)
 fun all_answers f xs =
   let
@@ -75,4 +51,32 @@ fun all_answers f xs =
       val result = end_or_append xs []
   in
       if length result <> length xs then NONE else SOME result
-  end
+  end;
+
+
+datatype pattern = Wildcard
+		 | Variable of string
+		 | UnitP
+		 | ConstP of int
+		 | TupleP of pattern list
+		 | ConstructorP of string * pattern
+
+datatype valu = Const of int
+	      | Unit
+	      | Tuple of valu list
+	      | Constructor of string * valu
+
+fun g f1 f2 p =
+    let 
+	val r = g f1 f2 
+    in
+	case p of
+	    Wildcard          => f1 ()
+	  | Variable x        => f2 x
+	  | TupleP ps         => List.foldl (fn (p,i) => (r p) + i) 0 ps
+	  | ConstructorP(_,p) => r p
+	  | _                 => 0
+    end
+
+(*-9-*)
+fun count_wildcards p = g (fn () => 1) (fn x => 0) p
