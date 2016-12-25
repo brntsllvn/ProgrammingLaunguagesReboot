@@ -34,13 +34,15 @@ val p3_5 = longest_string2 ["b","cd","dc","a"] = "dc"
 val pp__ = longest_string2 ["A","bc","C"] = "bc";
 
 print("---4---" ^ "\n");
-(*
-val ls3 = longest_string3
-val ls4 = longest_string4
-val p4_1 = longest_string_helper ls3 [] = ""
-val p4_2 = longest_string_helper ls3 ["b"] = "b"
-*)
+val lsh   = longest_string_helper;
+val ls3   = longest_string3
+val ls4   = longest_string4
+val ls3_0 = longest_string3 [] = ""
+val ls3_1 = longest_string3 ["b","cd","dc","a"] = "cd"
+val ls4_0 = longest_string4 [] = ""
+val ls4_1 = longest_string4 ["b","cd","dc","a"] = "dc";
 
+(*
 print("---5---" ^ "\n");
 val p5_1 = longest_capitalized [] = ""
 val p5_2 = longest_capitalized ["b"] = ""
@@ -63,6 +65,9 @@ print("---7---" ^ "\n");
 (*val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3]*)
 val p7_5 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
 
+print("---x---" ^ "\n");
+fun div_by_zero x = x div 0;
+val oops = (div_by_zero 5 handle _ => ~5) = ~5;
 
 print("---8---" ^ "\n");
 fun f x = if x = 1 then SOME [x] else NONE
@@ -72,7 +77,12 @@ val p8_3 = all_answers f [2] = NONE
 val p8_4 = all_answers f [1,2] = NONE
 val p8_5 = all_answers f [1,1] = SOME [1,1]
 val p8_6 = all_answers f [1,1,2] = NONE
-(*
+fun g x = if Char.isUpper(String.sub(x,0)) then NONE else SOME(String.explode x)
+val p8_7 = all_answers g ["no","caps"] = SOME(["s","p","a","c","o","n"])
+*)
+
+
+				       (*
 				   
 val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
 
