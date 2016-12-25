@@ -42,7 +42,6 @@ val ls3_1 = longest_string3 ["b","cd","dc","a"] = "cd"
 val ls4_0 = longest_string4 [] = ""
 val ls4_1 = longest_string4 ["b","cd","dc","a"] = "dc";
 
-(*
 print("---5---" ^ "\n");
 val p5_1 = longest_capitalized [] = ""
 val p5_2 = longest_capitalized ["b"] = ""
@@ -77,14 +76,12 @@ val p8_3 = all_answers f [2] = NONE
 val p8_4 = all_answers f [1,2] = NONE
 val p8_5 = all_answers f [1,1] = SOME [1,1]
 val p8_6 = all_answers f [1,1,2] = NONE
-fun g x = if Char.isUpper(String.sub(x,0)) then NONE else SOME(String.explode x)
-val p8_7 = all_answers g ["no","caps"] = SOME(["s","p","a","c","o","n"])
-*)
+val p8_7 = all_answers f [2,3,4,5,6,7] = NONE;
 
+print("---9---" ^ "\n");				       
 
 				       (*
-				   
-val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
+
 
 val test9a = count_wildcards Wildcard = 1
 
