@@ -78,24 +78,39 @@ val p8_5 = all_answers f [1,1] = SOME [1,1]
 val p8_6 = all_answers f [1,1,2] = NONE
 val p8_7 = all_answers f [2,3,4,5,6,7] = NONE;
 
-print("---9---" ^ "\n");
-print("!" ^ "\n");
+print("---9a---" ^ "\n");
 val p9a_1 = count_wildcards Wildcard = 1
 val p9a_2 = count_wildcards (Variable "b") = 0
 val p9a_3 = count_wildcards UnitP = 0
 val p9a_4 = count_wildcards (ConstP 2) = 0
 val p9a_5 = count_wildcards (TupleP [Wildcard]) = 1
 val p9a_6 = count_wildcards (TupleP [Wildcard,Wildcard]) = 2
-val p9a_7  = count_wildcards (TupleP [TupleP [Wildcard,Wildcard],Wildcard]) = 3
-val p9a_72 = count_wildcards (TupleP [TupleP [Wildcard,UnitP],Wildcard]) = 2
-val p9a_8 = count_wildcards (ConstructorP ("hi",Wildcard)) = 1
-val p9a_9 = count_wildcards (ConstructorP ("hi",TupleP [Wildcard])) = 1
-					   (*
+val p9a_7 = count_wildcards (TupleP [TupleP [Wildcard,Wildcard],Wildcard]) = 3
+val p9a_8 = count_wildcards (TupleP [TupleP [Wildcard,UnitP],Wildcard]) = 2
+val p9a_9 = count_wildcards (ConstructorP ("hi",Wildcard)) = 1
+val p9a_0 = count_wildcards (ConstructorP ("hi",TupleP [Wildcard])) = 1;
 
+print("---9b---" ^ "\n");
+val p9b_1 = count_wild_and_variable_lengths (Variable "a") = 1
+val p9b_2 = count_wild_and_variable_lengths (Variable "abc") = 3
+val p9b_3 = count_wild_and_variable_lengths Wildcard = 1
+val p9b_4 = count_wild_and_variable_lengths (TupleP [Variable "abc"]) = 3
+val p9b_5 = count_wild_and_variable_lengths (TupleP [Wildcard]) = 1
+val p9b_6 = count_wild_and_variable_lengths (TupleP [Variable "abc",Wildcard]) = 4
+val p9b_7 = count_wild_and_variable_lengths (ConstructorP ("hi",Variable "abc")) = 3
+val p9b_8 = count_wild_and_variable_lengths (ConstructorP ("hi",TupleP [Variable "abc",Wildcard])) = 4;	       
 
-val test9a = count_wildcards Wildcard = 1
+print("---9c---" ^ "\n");
+val p9c_1 = count_some_var("a",Variable "a") = 1 
+val p9c_2 = count_some_var("a",Variable "b") = 0
+val p9c_3 = count_some_var("abc",Variable "abc") = 1
+val p9c_4 = count_some_var("a",TupleP [Variable "a",Variable "a"]) = 2
+val p9c_5 = count_some_var("abc",TupleP [Variable "abc",Variable "a"]) = 1
+val p9c_6 = count_some_var("abc",TupleP [TupleP [Variable "abc",Wildcard],Variable "a"]) = 1
+val p9c_7 = count_some_var("abc",TupleP [Variable "abc",ConstructorP("hi",Variable "abc")]) = 2
 
-val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
+									     (*
+
 
 val test9c = count_some_var ("x", Variable("x")) = 1
 

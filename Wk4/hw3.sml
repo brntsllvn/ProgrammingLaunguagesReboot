@@ -78,5 +78,14 @@ fun g f1 f2 p =
 	  | _                 => 0
     end
 
-(*-9-*)
-fun count_wildcards p = g (fn () => 1) (fn x => 0) p
+(*-9a-*)
+fun count_wildcards p =
+  g (fn () => 1) (fn x => 0) p
+
+(*-9b-*)
+fun count_wild_and_variable_lengths p =
+  g (fn () => 1) (fn x => String.size x) p
+
+(*-9c-*)
+fun count_some_var(str,p) =
+  g (fn () => 0) (fn x => if x = str then 1 else 0) p
