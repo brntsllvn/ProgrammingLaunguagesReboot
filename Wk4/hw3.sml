@@ -91,47 +91,39 @@ fun count_some_var(str,p) =
   g (fn () => 0) (fn x => if x = str then 1 else 0) p
 
 (*-10-*)
-fun get_variable_strngs p =
-  case p of
-      Variable x => [x]
-    | TupleP ps => List.foldl (fn (p,acc) => (get_variable_strngs p) @ acc) [] ps
-    | ConstructorP(_,p) => get_variable_strngs p
-    | _ => [] 
-         
-fun r xs =
-  let
-      fun count_repeats findme listOStrings =
-	case listOStrings of
-	    [] => 0
-	  | x::xs' => if x = findme
-		      then 1 + count_repeats findme xs'
-		      else count_repeats findme xs'
-
-      fun loop listOStrings =
-	case listOStrings of
-	    [] => false
-	  | x::[] => false 
-	  | x::xs' => if count_repeats x xs > 1
-		      then true
-		      else false orelse loop xs'			 
-  in
-      loop xs
-  end
-      
-
-	       
-(*
 fun check_pat p =
   let
-      fun get_variable_strings p =
-	["hi","bye"]
-      fun contains_repeats xs =
-	true
+      fun get_variable_strngs p =
+	case p of
+	    Variable x => [x]
+	  | TupleP ps => List.foldl (fn (p,acc) => (get_variable_strngs p) @ acc) [] ps
+	  | ConstructorP(_,p) => get_variable_strngs p
+	  | _ => [] 
+		     
+      fun r xs =
+	let
+	    fun count_repeats findme listOStrings =
+	      case listOStrings of
+		  [] => 0
+		| x::xs' => if x = findme
+			    then 1 + count_repeats findme xs'
+			    else count_repeats findme xs'
+					       
+	    fun loop listOStrings =
+	      case listOStrings of
+		  [] => false
+		| x::[] => false 
+		| x::xs' => if count_repeats x xs > 1
+			    then true
+			    else false orelse loop xs'			 
+	in
+	    loop xs
+	end;
+      val strngs = get_variable_strngs p;      
   in
-      true
+      r strngs
   end
-      
-*)
+
 
 
 		      
