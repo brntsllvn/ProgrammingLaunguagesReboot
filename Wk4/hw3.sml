@@ -93,14 +93,34 @@ fun count_some_var(str,p) =
 (*-10-*)
 fun get_variable_strngs p =
   case p of
-      Wildcard  => []
-    | Variable x => [x]
+      Variable x => [x]
     | TupleP ps => List.foldl (fn (p,acc) => (get_variable_strngs p) @ acc) [] ps
     | ConstructorP(_,p) => get_variable_strngs p
-			| _ => [] 
+    | _ => [] 
          
+fun r xs =
+  let
+      fun count_repeats findme listOStrings =
+	case listOStrings of
+	    [] => 0
+	  | x::xs' => if x = findme
+		      then 1 + count_repeats findme xs'
+		      else count_repeats findme xs'
 
-			       (*
+      fun loop listOStrings =
+	case listOStrings of
+	    [] => false
+	  | x::[] => false 
+	  | x::xs' => if count_repeats x xs > 1
+		      then true
+		      else false orelse loop xs'			 
+  in
+      loop xs
+  end
+      
+
+	       
+(*
 fun check_pat p =
   let
       fun get_variable_strings p =
@@ -117,4 +137,4 @@ fun check_pat p =
 		      
 (*-11-*)
 (*-12-*)
-fun first_match v [] = SOME []    
+(*fun first_match v [] = SOME []  *)  
