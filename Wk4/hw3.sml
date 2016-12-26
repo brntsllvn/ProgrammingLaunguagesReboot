@@ -123,10 +123,18 @@ fun check_pat p =
   in
       r strngs
   end
-
-
-
 		      
 (*-11-*)
+fun match (v,p) =
+  case (v,p) of
+      (_, Wildcard) => SOME []
+    | (Unit, UnitP) => SOME []
+    | (my_val, Variable str) => SOME [(Variable str, my_val)] 
+    | (Const x, ConstP y) => if x = y then SOME [] else NONE 
+    | (Tuple vs, TupleP ps) => if List.length vs = List.length ps 
+			       then SOME []
+			       else NONE
+    | _ => NONE;
+      
 (*-12-*)
-(*fun first_match v [] = SOME []  *)  
+fun first_match v ps = SOME []
