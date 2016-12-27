@@ -134,6 +134,9 @@ fun match (v,p) =
     | (Tuple vs, TupleP ps) => if List.length vs = List.length ps 
 			       then SOME []
 			       else NONE
+    | (Constructor(vStr,v),ConstructorP(pStr,p)) => if vStr = pStr
+						    then match (v,p)
+						    else NONE
     | _ => NONE;
       
 (*-12-*)

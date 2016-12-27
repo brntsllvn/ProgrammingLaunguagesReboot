@@ -177,6 +177,10 @@ val p11_19 = match (Tuple [Const 1], TupleP [ConstP 1]) = SOME []
 val p11_20 = match (Tuple [Const 1], TupleP [Variable "hi"]) = SOME[("hi", Const 1)]
 val p11_21 = match (Constructor("a",Unit), TupleP [ConstP 1]) = NONE;
 
+val p11_22 = match (Const 1, ConstructorP ("hi",ConstP 1)) = NONE;
+val p11_23 = match (Constructor("a",Unit), ConstructorP ("a",UnitP)) = SOME []
+val p11_24 = match (Constructor("a",Const 1), ConstructorP("a",Variable "hi")) = SOME [("hi",Const 1)]
+									    
 (*
 print("---12---" ^ "\n");			
 first_match;
