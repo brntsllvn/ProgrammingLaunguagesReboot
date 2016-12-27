@@ -76,7 +76,8 @@ val p8_3 = all_answers f [2] = NONE
 val p8_4 = all_answers f [1,2] = NONE
 val p8_5 = all_answers f [1,1] = SOME [1,1]
 val p8_6 = all_answers f [1,1,2] = NONE
-val p8_7 = all_answers f [2,3,4,5,6,7] = NONE;
+val p8_7 = all_answers f [2,3,4,5,6,7] = NONE;  
+
 
 print("---9a---" ^ "\n");
 val p9a_1 = count_wildcards Wildcard = 1
@@ -179,12 +180,10 @@ val p11_21 = match (Constructor("a",Unit), TupleP [ConstP 1]) = NONE;
 
 val p11_22 = match (Const 1, ConstructorP ("hi",ConstP 1)) = NONE;
 val p11_23 = match (Constructor("a",Unit), ConstructorP ("a",UnitP)) = SOME []
-val p11_24 = match (Constructor("a",Const 1), ConstructorP("a",Variable "hi")) = SOME [("hi",Const 1)]
+val p11_24 = match (Constructor("a",Const 1), ConstructorP("a",Variable "hi")) = SOME [("hi",Const 1)];
 									    
-(*
 print("---12---" ^ "\n");			
 first_match;
 val p12_1 = first_match (Const 1) [ConstP 1] = SOME []
 val p12_2 = first_match Unit [UnitP] = SOME []
-val p12_3 = first_match (Constructor ("egg",Const 4)) [ConstP 4] = NONE					     
-*)
+val p12_3 = first_match (Constructor ("egg",Const 4)) [ConstP 4] = NONE
