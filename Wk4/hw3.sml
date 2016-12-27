@@ -111,11 +111,11 @@ fun check_pat p =
 					       
 	    fun loop listOStrings =
 	      case listOStrings of
-		  [] => false
-		| x::[] => false 
+		  [] => true
+		| x::[] => true 
 		| x::xs' => if count_repeats x xs > 1
-			    then true
-			    else false orelse loop xs'			 
+			    then false
+			    else true andalso loop xs'			 
 	in
 	    loop xs
 	end;
@@ -129,7 +129,7 @@ fun match (v,p) =
   case (v,p) of
       (_, Wildcard) => SOME []
     | (Unit, UnitP) => SOME []
-    | (my_val, Variable str) => SOME [(Variable str, my_val)] 
+    | (my_val, Variable str) => SOME [(str, my_val)] 
     | (Const x, ConstP y) => if x = y then SOME [] else NONE 
     | (Tuple vs, TupleP ps) => if List.length vs = List.length ps 
 			       then SOME []
@@ -138,3 +138,5 @@ fun match (v,p) =
       
 (*-12-*)
 fun first_match v ps = SOME []
+
+			    

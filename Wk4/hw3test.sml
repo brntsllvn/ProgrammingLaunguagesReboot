@@ -135,15 +135,19 @@ val rep_4 = r ["hi","po"] = false
 val rep_5 = r ["hi","po","hi"] = true;
 *)
 check_pat;
-val p10_1 = check_pat Wildcard = false
-val p10_2 = check_pat (Variable "hi") = false
-val p10_3 = check_pat UnitP = false
-val p10_4 = check_pat (ConstP 3) = false
-val p10_5 = check_pat (TupleP [Variable "hi"]) = false
-val p10_6 = check_pat (TupleP [Variable "hi",Variable "hi"]) = true
-val p10_7 = check_pat (ConstructorP("a",Variable "hi")) = false
-val p10_8 = check_pat (TupleP [Variable "hi",TupleP [Variable "hi"]]) = true
-val p10_9 = check_pat (ConstructorP("a",TupleP [Variable "hi",UnitP,ConstructorP("a",Variable "hi")])) = true;
+val p10_1 = check_pat Wildcard = true
+val p10_2 = check_pat (Variable "hi") = true
+val p10_3 = check_pat UnitP = true
+val p10_4 = check_pat (ConstP 3) = true
+val p10_5 = check_pat (TupleP [Variable "hi"]) = true
+val p10_6 = check_pat (TupleP [Variable "hi",Variable "hi"]) = false
+val p10_7 = check_pat (ConstructorP("a",Variable "hi")) = true
+val p10_8 = check_pat (TupleP [Variable "hi",TupleP [Variable "hi"]]) = false
+val p10_9 = check_pat (ConstructorP("a",TupleP [Variable "hi",UnitP,ConstructorP("a",Variable "hi")])) = false
+val p10_10 = check_pat (TupleP[Variable "x",ConstructorP ("wild",Wildcard)] )= true;
+val p10_11 = check_pat (TupleP[TupleP[Variable "x",ConstructorP ("wild",Wildcard)],Variable "x"]) = false
+val p10_12 = check_pat (ConstructorP ("hi",TupleP[Variable "x",Variable "x"])) = false
+val p10_13 = check_pat (TupleP[ConstP 17,Wildcard,ConstP 4,ConstructorP ("egg",ConstP 4),ConstructorP ("egg",ConstructorP ("egg",ConstP 4))]) = true;
 									    
 print("---11---" ^ "\n");
 match;
@@ -157,10 +161,10 @@ val p11_6 = match (Unit, UnitP) = SOME []
 val p11_7 = match (Tuple [Const 1], UnitP) = NONE
 val p11_8 = match (Constructor ("hi",Unit), UnitP) = NONE
 
-val p11_9  = match (Const 1, Variable "hi") = SOME [(Variable "hi",Const 1)]
-val p11_10 = match (Unit, Variable "hi") = SOME [(Variable "hi",Unit)] 		     
-val p11_11 = match (Tuple [Const 1], Variable "hi") = SOME [(Variable "hi",Tuple [Const 1])]
-val p11_12 = match (Constructor("a",Unit), Variable "hi") = SOME [(Variable "hi",Constructor("a",Unit))]
+val p11_9  = match (Const 1, Variable "hi") = SOME [("hi",Const 1)]
+val p11_10 = match (Unit, Variable "hi") = SOME [("hi",Unit)] 		     
+val p11_11 = match (Tuple [Const 1], Variable "hi") = SOME [("hi",Tuple [Const 1])]
+val p11_12 = match (Constructor("a",Unit), Variable "hi") = SOME [("hi",Constructor("a",Unit))]
 
 val p11_13 = match (Const 1, ConstP 1) = SOME []
 val p11_14 = match (Unit, ConstP 1) = NONE
@@ -170,10 +174,13 @@ val p11_16 = match (Constructor("a",Unit), ConstP 1) = NONE
 val p11_17 = match (Const 1, TupleP [ConstP 1]) = NONE
 val p11_18 = match (Unit, TupleP [ConstP 1]) = NONE
 val p11_19 = match (Tuple [Const 1], TupleP [ConstP 1]) = SOME []
-val p11_20 = match (Tuple [Const 1], TupleP [Variable "hi"]) = SOME[(Variable "hi", Const 1)]
+val p11_20 = match (Tuple [Const 1], TupleP [Variable "hi"]) = SOME[("hi", Const 1)]
 val p11_21 = match (Constructor("a",Unit), TupleP [ConstP 1]) = NONE;
 
+(*
 print("---12---" ^ "\n");			
 first_match;
 val p12_1 = first_match (Const 1) [ConstP 1] = SOME []
-val test12 = first_match Unit [UnitP] = SOME []
+val p12_2 = first_match Unit [UnitP] = SOME []
+val p12_3 = first_match (Constructor ("egg",Const 4)) [ConstP 4] = NONE					     
+*)
