@@ -26,6 +26,10 @@
         [(= n 1)(cons (car (s)) null)]
         [#t (cons (car (s)) (stream-for-n-steps (cdr (s)) (- n 1)))]))   
 
+; #5
+(define funny-number-stream
+  (letrec([f (lambda(x) (cons (if (= (remainder x 5) 0) (* x -1) x) (lambda() (f(+ x 1)))))])
+    (lambda() (f 1))))
 
 
 
