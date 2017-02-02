@@ -28,9 +28,21 @@
 
 ; #5
 (define funny-number-stream
-  (letrec([f (lambda(x) (cons (if (= (remainder x 5) 0) (* x -1) x) (lambda() (f(+ x 1)))))])
-    (lambda() (f 1))))
+  (letrec([f (lambda(x) (cons (if (= (remainder x 5) 0) (* x -1) x)
+                              (lambda() (f(+ x 1)))
+                              ))]
+          )
+    (lambda() (f 1)))
+  )
 
+; #6
+(define dan-then-dog
+  (letrec([f (lambda(x) (cons (if (odd? x) "dan.jpg" "dog.jpg")
+                              (lambda() (f(+ x 1)))
+                              ))]
+          )
+    (lambda() (f 1)))
+  )
 
 
 
