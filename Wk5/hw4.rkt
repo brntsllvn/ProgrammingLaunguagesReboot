@@ -29,21 +29,23 @@
 ; #5
 (define funny-number-stream
   (letrec([f (lambda(x) (cons (if (= (remainder x 5) 0) (* x -1) x)
-                              (lambda() (f(+ x 1)))
-                              ))]
-          )
-    (lambda() (f 1)))
-  )
+                              (lambda() (f(+ x 1)))))])
+    (lambda() (f 1))))
 
 ; #6
 (define dan-then-dog
   (letrec([f (lambda(x) (cons (if (odd? x) "dan.jpg" "dog.jpg")
-                              (lambda() (f(+ x 1)))
-                              ))]
-          )
-    (lambda() (f 1)))
-  )
+                              (lambda() (f(+ x 1)))))])
+    (lambda() (f 1))))
 
+; #7
+(define ones (lambda () (cons 1 ones)))
+
+(define (stream-add-zero s)
+  (define (f x)
+    (cons (cons 0 (car (x))) (λ() (f (cdr (x))))))
+  (λ()(f s)))
+  
 
 
 

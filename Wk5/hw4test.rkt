@@ -58,11 +58,13 @@
    (check-equal? (stream-for-n-steps dan-then-dog 3) (list "dan.jpg" "dog.jpg" "dan.jpg"))
    
    ; stream-add-zero test
-   ;(check-equal? (stream-for-n-steps (stream-add-zero ones) 1) (list (cons 0 1)) "stream-add-zero test")
+   (check-equal? (stream-for-n-steps (stream-add-zero ones) 1) (list (cons 0 1)) "stream-add-zero test")
+   (check-equal? (stream-for-n-steps (stream-add-zero ones) 2) (list (cons 0 1)(cons 0 1)))
+   (check-equal? (stream-for-n-steps (stream-add-zero twos) 2) (list (cons 0 2) (cons 0 2)))
    
    ; cycle-lists test
    ;(check-equal? (stream-for-n-steps (cycle-lists (list 1 2 3) (list "a" "b")) 3) (list (cons 1 "a") (cons 2 "b") (cons 3 "a")) 
-                 "cycle-lists test")
+   ;             "cycle-lists test")
    
    ; vector-assoc test
    ;(check-equal? (vector-assoc 4 (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1))) (cons 4 1) "vector-assoc test")
@@ -73,7 +75,7 @@
    ; while-less test
    ;(check-equal? (while-less 7 do (begin (set! a (+ a 1)) a)) #t "while-less test")
    
-   ;)
+   )
 )
 
 (require rackunit/text-ui)
