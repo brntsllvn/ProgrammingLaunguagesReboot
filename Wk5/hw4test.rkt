@@ -75,7 +75,11 @@
                  (list (cons "betsy" "wang") (cons "betsy" "sullivan") (cons "betsy" "wang") (cons "betsy" "sullivan")))
    
    ; vector-assoc test
-   ;(check-equal? (vector-assoc 4 (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1))) (cons 4 1) "vector-assoc test")
+   (check-equal? (vector-assoc 4 (vector "hello")) #f)
+   (check-equal? (vector-assoc 4 (vector 4)) #f)
+   (check-equal? (vector-assoc 4 (vector (cons 3 4))) #f)
+   (check-equal? (vector-assoc 4 (vector (cons 4 3))) (cons 4 3))
+   (check-equal? (vector-assoc 4 (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1))) (cons 4 1) "vector-assoc test")
    
    ; cached-assoc tests
    ;(check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 3) 3) (cons 3 4) "cached-assoc test")

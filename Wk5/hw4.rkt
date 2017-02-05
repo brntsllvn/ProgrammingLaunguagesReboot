@@ -66,20 +66,25 @@
             (λ() (iterator (+ n 1) (cdr (x-stream)) (cdr (y-stream))) )))
     (λ()(iterator 0 x-stream y-stream))
   ))
-      
+
+; #9
+(define (vector-assoc val vec)
+  (define (iterator index)
+
+
+    (if (< index (vector-length vec))
+           (if (and (pair? (vector-ref vec index)) (equal? val (car (vector-ref vec index))))
+               (vector-ref vec index)
+               (or #f (iterator (+ index 1))))
+           #f))
+
+
 
   
-
+  (iterator 0))
   
 
- ;   (
-     ; cons first elements from each stream
-     ; recurse through cdr of each (they're the same length: infinity)
- ;    (define (f n)
- ;      (cons 
- ;       f (+ n 1)
- ;       ))))
- ; (λ()(f xs ys)))
+ 
 
 
 
