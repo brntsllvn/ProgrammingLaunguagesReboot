@@ -63,8 +63,16 @@
    (check-equal? (stream-for-n-steps (stream-add-zero twos) 2) (list (cons 0 2) (cons 0 2)))
    
    ; cycle-lists test
-   ;(check-equal? (stream-for-n-steps (cycle-lists (list 1 2 3) (list "a" "b")) 3) (list (cons 1 "a") (cons 2 "b") (cons 3 "a")) 
-   ;             "cycle-lists test")
+   ;(check-equal? (stream-for-n-steps (transform-list-into-stream (list 1 2 3)) 5) (list 1 2 3 1 2))
+   ;(check-equal? (stream-for-n-steps (transform-list-into-stream (list "a" 2)) 4) (list "a" 2 "a" 2))
+   
+   (check-equal? (stream-for-n-steps
+                  (cycle-lists (list 1 2 3) (list "a" "b")) 3)
+                  (list (cons 1 "a") (cons 2 "b") (cons 3 "a")) "cycle-lists test")
+
+   (check-equal? (stream-for-n-steps
+                 (cycle-lists (list "betsy") (list "wang" "sullivan")) 4)
+                 (list (cons "betsy" "wang") (cons "betsy" "sullivan") (cons "betsy" "wang") (cons "betsy" "sullivan")))
    
    ; vector-assoc test
    ;(check-equal? (vector-assoc 4 (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1))) (cons 4 1) "vector-assoc test")

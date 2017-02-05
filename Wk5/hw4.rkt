@@ -39,14 +39,47 @@
     (lambda() (f 1))))
 
 ; #7
-(define ones (lambda () (cons 1 ones)))
-
 (define (stream-add-zero s)
   (define (f x)
     (cons (cons 0 (car (x))) (λ() (f (cdr (x))))))
   (λ()(f s)))
   
+; #8
+(define (transform-list-into-stream my-list)
+  (letrec([f (λ(index) (cons
+                        (list-ref my-list (remainder index (length my-list)))
+                        (λ() (f(+ index 1)))))])
+    (λ() (f 0))))
 
+(define (cycle-lists xs ys)
+  
+  (define (transform-list-into-stream my-list)
+    (letrec([f (λ(index) (cons
+                          (list-ref my-list (remainder index (length my-list)))
+                          (λ() (f(+ index 1)))))])
+      (λ() (f 0))))
+  
+  (letrec([x-stream (transform-list-into-stream xs)] 
+          [y-stream (transform-list-into-stream ys)])
+    (define (iterator n x-stream y-stream)
+      (cons (cons (car (x-stream)) (car (y-stream)))
+            (λ() (iterator (+ n 1) (cdr (x-stream)) (cdr (y-stream))) )))
+    (λ()(iterator 0 x-stream y-stream))
+  ))
+      
+
+  
+
+  
+
+ ;   (
+     ; cons first elements from each stream
+     ; recurse through cdr of each (they're the same length: infinity)
+ ;    (define (f n)
+ ;      (cons 
+ ;       f (+ n 1)
+ ;       ))))
+ ; (λ()(f xs ys)))
 
 
 
