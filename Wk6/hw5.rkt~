@@ -22,13 +22,6 @@
 
 ;; Problem 1
 
-(define (racketlist->mupllist lst)
-  (cond [(null? lst) (aunit)]
-        [(null? (cdr lst)) (apair (car lst) (aunit))]
-        [#t (apair (car lst) (racketlist->mupllist (cdr lst)))]
-        ))
-
-
 ;; CHANGE (put your solutions here)
 
 ;; Problem 2
