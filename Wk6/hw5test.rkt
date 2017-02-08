@@ -18,12 +18,16 @@
    (check-equal? (racketlist->mupllist (list (int 3))) (apair (int 3) (aunit)))
    (check-equal? (racketlist->mupllist (list (int 3) (int 4)))
                  (apair (int 3) (apair (int 4) (aunit))) "racketlist->mupllist test")
+   (check-equal? (racketlist->mupllist (list (apair (int 1) (aunit))))
+                 (apair (apair (int 1) (aunit)) (aunit)))
       
    ;; check mupllist to racketlist with normal list
    (check-equal? (mupllist->racketlist (aunit)) (list))
    (check-equal? (mupllist->racketlist (apair (int 4) (aunit))) (list (int 4)))
    (check-equal? (mupllist->racketlist (apair (int 3) (apair (int 4) (aunit))))
                  (list (int 3) (int 4)) "racketlist->mupllist test")
+   (check-equal? (mupllist->racketlist (apair (apair (int 1) (aunit)) (aunit)))
+                 (list (apair (int 1) (aunit))))
 
    ;; tests if ifgreater returns (int 2)
    ;(check-equal? (eval-exp (ifgreater (int 3) (int 4) (int 3) (int 2))) (int 2) "ifgreater test")
