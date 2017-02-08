@@ -17,17 +17,25 @@
 (struct aunit ()    #:transparent) ;; unit value -- good for ending a list
 (struct isaunit (e) #:transparent) ;; evaluate to 1 if e is unit else 0
 
-;; a closure is not in "source" programs but /is/ a MUPL value; it is what functions evaluate to
+;; a closure is not in "source" programs but /is/ a MUPL value;
+;; it is what functions evaluate to
 (struct closure (env fun) #:transparent) 
 
 ;; Problem 1
 
+; 1a
 (define (racketlist->mupllist lst)
   (cond [(null? lst) (aunit)]
         [(null? (cdr lst)) (apair (car lst) (aunit))]
-        [#t (apair (car lst) (racketlist->mupllist (cdr lst)))]
-        ))
+        [#t (apair (car lst) (racketlist->mupllist (cdr lst)))]))
 
+; 1b
+(define (mupllist->racketlist lst)
+  (cond [(aunit? lst) (list)]
+        [(and (apair? lst) (aunit? (apair-e2 lst))) (list (apair-e1 lst))]
+        [#t (cons (apair-e1 lst) (mupllist->racketlist (apair-e2 lst)))]
+        ))
+        
 
 ;; CHANGE (put your solutions here)
 
