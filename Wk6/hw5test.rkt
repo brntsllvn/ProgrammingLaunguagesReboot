@@ -29,20 +29,48 @@
    (check-equal? (mupllist->racketlist (apair (apair (int 1) (aunit)) (aunit)))
                  (list (apair (int 1) (aunit))))
 
-   ;; tests if ifgreater returns (int 2)
-   ;(check-equal? (eval-exp (ifgreater (int 3) (int 4) (int 3) (int 2))) (int 2) "ifgreater test")
+   ;; test drive envlookup
+   (check-exn exn:fail? (λ () (envlookup (list) "hi")))
+   (check-equal? (envlookup (list (cons "var" 2)) "var") 2)
+   (check-equal? (envlookup (list (cons "var" 2) (cons "hi" 17)) "hi") 17)
+   (check-exn exn:fail? (λ () (envlookup (list (cons "var" 2)) "hi")))
+
+   (check-equal? (eval-under-env (int 17) (list)) (int 17))
+   (check-equal? (eval-under-env (add (int 1) (int 2)) (list)) (int 3))
+   (check-equal? (eval-under-env (add (int 1) (var "hi")) (list (cons "hi" (int 17)))) (int 18))
+   (check-equal? (eval-under-env (aunit) (list)) (aunit))
+   (check-exn exn:fail? (λ () (eval-under-env (add (int 1) (aunit)))))
+   (check-equal? (eval-under-env (apair (int 1) (int 1)) (list)) (apair (int 1) (int 1)))
+   (check-equal? (eval-under-env (apair (add (int 1) (int 2)) (aunit)) (list)) (apair (int 3) (aunit)))
+   (check-equal? (eval-under-env (fun "myfun" "x" "x+2") (list))
+                 (closure (list) (fun "myfun" "x" "x+2")))
+   (check-equal? (eval-under-env (closure (list) (fun "myfun" "x" "x+2")) (list))
+                 (closure (list) (fun "myfun" "x" "x+2")))
+   
+   ;; ifgreater
+   (check-exn exn:fail? (λ() (eval-exp (ifgreater (int 3) (aunit) (int 3) (int 2)))))
+   (check-equal? (eval-exp (ifgreater (int 3) (int 4) (int 3) (int 2))) (int 2) "ifgreater test")
+   (check-equal? (eval-exp (ifgreater (int 5) (int 4) (int 1) (int 0))) (int 1))
    
    ;; mlet test
    ;(check-equal? (eval-exp (mlet "x" (int 1) (add (int 5) (var "x")))) (int 6) "mlet test")
    
    ;; call test
    ;(check-equal? (eval-exp (call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1))) (int 8) "call test")
+
+   ;; fst
+   (check-exn exn:fail? (λ() (eval-exp (fst (aunit))))) 
+   (check-equal? (eval-exp (fst (apair (int 1) (int 2)))) (int 1))
+   (check-equal? (eval-exp (fst (apair (add (int 1) (int 3)) (int 2)))) (int 4))
    
-   ;;snd test
-   ;(check-equal? (eval-exp (snd (apair (int 1) (int 2)))) (int 2) "snd test")
+   ;; snd
+   (check-exn exn:fail? (λ() (eval-exp (snd (aunit))))) 
+   (check-equal? (eval-exp (snd (apair (int 1) (int 2)))) (int 2) "snd test")
+   (check-equal? (eval-exp (snd (apair (int 1) (add (int 1) (int 3))))) (int 4) "snd test")
    
    ;; isaunit test
-   ;(check-equal? (eval-exp (isaunit (closure '() (fun #f "x" (aunit))))) (int 0) "isaunit test")
+   (check-equal? (eval-exp (isaunit (aunit))) (int 1))
+   (check-equal? (eval-exp (isaunit (closure '() (fun #f "x" (aunit))))) (int 0) "isaunit test")
    
    ;; ifaunit test
    ;(check-equal? (eval-exp (ifaunit (int 1) (int 2) (int 3))) (int 3) "ifaunit test")
