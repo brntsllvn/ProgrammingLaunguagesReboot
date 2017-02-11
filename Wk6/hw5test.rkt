@@ -53,11 +53,17 @@
    (check-equal? (eval-exp (ifgreater (int 5) (int 4) (int 1) (int 0))) (int 1))
    
    ;; mlet test
-   ;(check-equal? (eval-exp (mlet "x" (int 1) (add (int 5) (var "x")))) (int 6) "mlet test")
+   (check-equal? (eval-exp (mlet "x" (int 1) (var "x"))) (int 1))
+   (check-equal? (eval-exp (mlet "x" (int 1) (add (int 5) (var "x")))) (int 6) "mlet test")
+   (check-exn exn:fail? (λ() (eval-exp (mlet "x" (int 1) (var "y")))))
    
    ;; call test
-   ;(check-equal? (eval-exp (call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1))) (int 8) "call test")
-
+   (check-exn exn:fail? (λ() (eval-exp (call (var "x") (var "x")))))
+   (check-equal? (eval-exp (call (closure '() (fun #f "x" (var "x"))) (int 2))) (int 2))
+   (check-equal? (eval-exp (call (closure '() (fun #f "x" (add (var "x") (int 7)))) (int 1))) (int 8) "call test")
+   (check-equal? (eval-exp (call (closure '() (fun #f "x" (add (var "x") (int 7)))) (add (int 1) (int 3)))) (int 11))
+   (check-equal? (eval-exp (call (closure '() (fun "my-func" "x" (var "x"))) (int 2))) (int 2))
+   
    ;; fst
    (check-exn exn:fail? (λ() (eval-exp (fst (aunit))))) 
    (check-equal? (eval-exp (fst (apair (int 1) (int 2)))) (int 1))
@@ -73,10 +79,11 @@
    (check-equal? (eval-exp (isaunit (closure '() (fun #f "x" (aunit))))) (int 0) "isaunit test")
    
    ;; ifaunit test
-   ;(check-equal? (eval-exp (ifaunit (int 1) (int 2) (int 3))) (int 3) "ifaunit test")
+   (check-equal? (eval-exp (ifaunit (aunit) (int -1) (int 2))) (int -1))
+   (check-equal? (eval-exp (ifaunit (int 1) (int 2) (int 3))) (int 3) "ifaunit test")
    
    ;; mlet* test
-   ;(check-equal? (eval-exp (mlet* (list (cons "x" (int 10))) (var "x"))) (int 10) "mlet* test")
+   (check-equal? (eval-exp (mlet* (list (cons "x" (int 10))) (var "x"))) (int 10) "mlet* test")
    
    ;; ifeq test
    ;(check-equal? (eval-exp (ifeq (int 1) (int 2) (int 3) (int 4))) (int 4) "ifeq test")

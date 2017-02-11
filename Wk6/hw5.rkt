@@ -92,8 +92,36 @@
         [(isaunit? e)
          (let ([v (eval-under-env (isaunit-e e) env)])
          (if (aunit? v) (int 1) (int 0)))]
+        [(mlet? e)
+         (letrec ([var-name (mlet-var e)]
+                  [v (eval-under-env (mlet-e e) env)]
+                  [new-env-var (cons var-name v)]
+                  [new-env (cons new-env-var env)])
+           (eval-under-env (mlet-body e) new-env))]
+        [(call? e)
+         (if (not (closure? (call-funexp e)))
+             (error "MUPL call does not contain closure")
+             (letrec ([my-closure (call-funexp e)]
+                      [call-param (eval-under-env (call-actual e) '())]
+
+                      [my-closure-env  (closure-env my-closure)]
+
+                      [my-closure-func (closure-fun my-closure)]
+                      [my-closure-func-name   (fun-nameopt my-closure-func)]
+                      [my-closure-func-formal (fun-formal  my-closure-func)]
+                      [my-closure-func-body   (fun-body    my-closure-func)]
+
+                      ; extended to map function's name to the closure
+                      [new-env (cons (cons my-closure-func-formal call-param ) my-closure-env)]
+                      
+                      [evaluated-closure-func-body (eval-under-env my-closure-func-body new-env)])
+               evaluated-closure-func-body
+               ))]
         [#t (error (format "bad MUPL expression: ~v" e))]))
 
+;(struct call (funexp actual)       #:transparent)
+;(struct closure (env fun)          #:transparent) 
+;(struct fun  (nameopt formal body) #:transparent)
 
 
 ;; Do NOT change
@@ -102,9 +130,33 @@
         
 ;; Problem 3
 
-(define (ifaunit e1 e2 e3) "CHANGE")
+(define (ifaunit e1 e2 e3)
+  (if (aunit? (eval-under-env e1 '()))
+      (eval-under-env e2 '())
+      (eval-under-env e3 '())))
 
-(define (mlet* lstlst e2) "CHANGE")
+(define (mlet* lstlst e2)
+  (define (f listlist env)
+    (cond [(null? listlist) (aunit)]
+          [(null? (cdr listlist))
+           (letrec
+               ([head-var (car (car listlist))]
+                [head-exp (cdr (car listlist))]
+                [evaluated-head-exp (eval-under-env head-exp env)]
+                [new-env (cons (cons head-var evaluated-head-exp) env)])
+                new-env)]
+          [#t (letrec
+                  ([head-var (car (car listlist))]
+                   [head-exp (cdr (car listlist))]
+                   [evaluated-head-exp (eval-under-env head-exp env)]
+                   [new-env (cons (cons head-var evaluated-head-exp) env)]
+                   [tail (cdr listlist)])
+                (f tail new-env))])
+    )
+  (eval-under-env e2 (f lstlst '())))
+
+
+
 
 (define (ifeq e1 e2 e3 e4) "CHANGE")
 
