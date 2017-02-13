@@ -98,25 +98,20 @@
                   [new-env-var (cons var-name v)]
                   [new-env (cons new-env-var env)])
            (eval-under-env (mlet-body e) new-env))]
-        [(call? e)
-         (if (not (closure? (call-funexp e)))
-             (error "MUPL call does not contain closure")
-             (letrec ([my-closure (call-funexp e)]
-                      [call-param (eval-under-env (call-actual e) '())]
-
-                      [my-closure-env  (closure-env my-closure)]
-
-                      [my-closure-func (closure-fun my-closure)]
-                      [my-closure-func-name   (fun-nameopt my-closure-func)]
-                      [my-closure-func-formal (fun-formal  my-closure-func)]
-                      [my-closure-func-body   (fun-body    my-closure-func)]
-
-                      ; extended to map function's name to the closure
-                      [new-env (cons (cons my-closure-func-formal call-param ) my-closure-env)]
-                      
-                      [evaluated-closure-func-body (eval-under-env my-closure-func-body new-env)])
-               evaluated-closure-func-body
-               ))]
+        [(call? e) 
+         (let ([v1 (eval-under-env (call-funexp e) env)]
+               [v2 (eval-under-env (call-actual e) env)])
+           (if (closure? v1)
+               (let* ([c1 (closure-fun v1)]
+                     [c2 (closure-env v1)]
+                     [cn (cons (fun-nameopt c1) v1)]
+                     [cf (cons (fun-formal c1) v2)])
+                 (eval-under-env 
+                  (fun-body c1)
+                  (if (eq? (car cn) #f)
+                      (cons cf c2)
+                      (cons cf (cons cn c2)))))
+               (error "MUPL call does not have a closure!")))]
         [#t (error (format "bad MUPL expression: ~v" e))]))
 
 ;(struct call (funexp actual)       #:transparent)
@@ -155,14 +150,33 @@
     )
   (eval-under-env e2 (f lstlst '())))
 
-
-
-
-(define (ifeq e1 e2 e3 e4) "CHANGE")
+;; ifeq
+(define (ifeq e1 e2 e3 e4)
+  (let ([v1 (eval-under-env e1 '())]
+        [v2 (eval-under-env e2 '())])
+    (if (and (int? v1) (int? v2))
+        (if (= (int-num v1) (int-num v2))
+            (eval-under-env e3 '())
+            (eval-under-env e4 '())
+            )
+        (error "something went wrong, boo."))
+    )
+  )
 
 ;; Problem 4
-
-(define mupl-map "CHANGE")
+(define mupl-map
+  (fun #f "f"
+       (fun "loop" "xs"
+            (ifgreater 
+             (isaunit (var "xs")) 
+             (int 0)
+             (aunit)
+             (apair
+              (call (var "f") (fst (var "xs")))
+              (call (var "loop") (snd (var "xs")))))
+            )
+       )
+  )
 
 (define mupl-mapAddN 
   (mlet "map" mupl-map
