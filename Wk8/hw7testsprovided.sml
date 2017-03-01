@@ -11,6 +11,16 @@ use "hw7.sml";
 fun real_equal(x,y) = Real.compare(x,y) = General.EQUAL;
 
 (* Preprocess tests *)
+
+let 
+	val LineSegment(a,b,c,d) = preprocess_prog (LineSegment(1.0,1.0,2.0,2.0))
+	val LineSegment(e,f,g,h) = LineSegment(1.0,1.0,2.0,2.0)
+in
+	if real_equal(a,e) andalso real_equal(b,f) andalso real_equal(c,g) andalso real_equal(d,h)
+	then (print "preprocess leaves LineSegment as is\n")
+	else (print "preprocess screwed it up!\n")
+end;
+
 let
 	val Point(a,b) = preprocess_prog(LineSegment(3.2,4.1,3.2,4.1))
 	val Point(c,d) = Point(3.2,4.1)
@@ -28,6 +38,27 @@ in
 	then (print "preprocess flips an improper LineSegment successfully\n")
 	else (print "preprocess does not flip an improper LineSegment successfully\n")
 end;
+
+let 
+	val LineSegment(a,b,c,d) = preprocess_prog (LineSegment(3.2,4.1,3.2,~4.1))
+	val LineSegment(e,f,g,h) = LineSegment(3.2,~4.1,3.2,4.1)
+in
+	if real_equal(a,e) andalso real_equal(b,f) andalso real_equal(c,g) andalso real_equal(d,h)
+	then (print "preprocess flips an improper LineSegment successfully\n")
+	else (print "preprocess does not flip an improper LineSegment successfully\n")
+end;
+
+let 
+	val LineSegment(a,b,c,d) = preprocess_prog (LineSegment(3.2,4.1,~3.2,4.1))
+	val LineSegment(e,f,g,h) = LineSegment(~3.2,4.1,3.2,4.1)
+in
+	if real_equal(a,e) andalso real_equal(b,f) andalso real_equal(c,g) andalso real_equal(d,h)
+	then (print "preprocess flips an improper LineSegment successfully\n")
+	else (print "preprocess does not flip an improper LineSegment successfully\n")
+end;
+
+(*
+
 
 (* eval_prog tests with Shift*)
 let 
@@ -59,3 +90,8 @@ in
 	then (print "eval_prog with shadowing 'a' in environment is working properly\n")
 	else (print "eval_prog with shadowing 'a' in environment is not working properly\n")
 end;
+
+
+
+
+*)
