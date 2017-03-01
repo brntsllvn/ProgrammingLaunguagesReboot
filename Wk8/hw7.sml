@@ -1,3 +1,38 @@
+(* University of Washington, Programming Languages, Homework 7, hw7.sml 
+   (See also Ruby code.)
+*)
+
+(* Do not make changes to this code except where you see comments containing
+   the word CHANGE. *)
+
+(* expressions in a little language for 2D geometry objects
+   values: points, lines, vertical lines, line segments
+   other expressions: intersection of two expressions, lets, variables, 
+                      (shifts added by you)
+*)
+datatype geom_exp = 
+           NoPoints
+	 | Point of real * real (* represents point (x,y) *)
+	 | Line of real * real (* represents line (slope, intercept) *)
+	 | VerticalLine of real (* x value *)
+	 | LineSegment of real * real * real * real (* x1,y1 to x2,y2 *)
+	 | Intersect of geom_exp * geom_exp (* intersection expression *)
+	 | Let of string * geom_exp * geom_exp (* let s = e1 in e2 *)
+	 | Var of string
+	 | Shift of real * real * geom_exp
+(* CHANGE add shifts for expressions of the form Shift(deltaX, deltaY, exp *)
+
+exception BadProgram of string
+exception Impossible of string
+
+(* helper functions for comparing real numbers since rounding means
+   we should never compare for equality *)
+
+val epsilon = 0.00001
+
+fun real_close (r1,r2) = 
+  (Real.abs (r1 - r2)) < epsilon
+			     
 (* notice curried *)
 fun real_close_point (x1,y1) (x2,y2) = 
     real_close(x1,x2) andalso real_close(y1,y2)
@@ -161,6 +196,11 @@ fun eval_prog (e,env) =
 	   | SOME (_,v) => v)
       | Let(s,e1,e2) => eval_prog (e2, ((s, eval_prog(e1,env)) :: env))
       | Intersect(e1,e2) => intersect(eval_prog(e1,env), eval_prog(e2, env))
+      | Shift(deltaX,deltaY,e) => Point(100.0,100.0)  
 (* CHANGE: Add a case for Shift expressions *)
 
 (* CHANGE: Add function preprocess_prog of type geom_exp -> geom_exp *)
+fun preprocess_prog (LineSegment(x1,y1,x2,y2)) =
+  if real_close_point (x1,y1) (x2,y2)
+  then Point(x1,y1)
+  else Point(1000000.0,1000000.0)
