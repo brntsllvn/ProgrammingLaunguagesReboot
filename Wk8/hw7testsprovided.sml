@@ -68,8 +68,6 @@ in
 	else (print "fail\n")
 end;
 
-(*
-
 
 (* eval_prog tests with Shift*)
 let 
@@ -81,17 +79,48 @@ in
 	else (print "eval_prog with empty environment is not working properly\n")
 end;
 
+(* line *)
+(* b + deltaY − m · deltaX *)
+let 
+	val Line(a,b) = (eval_prog (Shift(3.0, 4.0, Line(4.0,4.0)), []))
+	val Line(c,d) = Line(4.0,~4.0) 
+in
+	if real_equal(a,c) andalso real_equal(b,d)
+	then (print "line shift worked: PASS\n")
+	else (print "line shift broke! FAIL\n")
+end;
+
+(* A VerticalLine becomes a VerticalLine shifted by deltaX ; the deltaY is irrelevant *)
+let 
+	val VerticalLine(a) = (eval_prog (Shift(3.0, 4.0, VerticalLine(4.0)), []))
+	val VerticalLine(b) = VerticalLine(7.0)
+in
+	if real_equal(a,b)
+	then (print "vertical line shift worked: PASS\n")
+	else (print "vertical line shift broke! FAIL\n")
+end;
+
+(* A LineSegment has its endpoints shift by deltaX and deltaY *)
+let 
+	val LineSegment(a,b,c,d) = (eval_prog (Shift(4.0, 4.0, LineSegment(0.0,0.0,1.0,1.0)), []))
+	val LineSegment(e,f,g,h) = LineSegment(4.0,4.0,5.0,5.0)
+in
+	if real_equal(a,e) andalso real_equal(b,f) andalso real_equal(c,g) andalso real_equal(d,h)
+	then (print "shift line segment: PASS\n")
+	else (print "shift line segment: Fail\n")
+end;
+
 (* Using a Var *)
 let 
 	val Point(a,b) = (eval_prog (Shift(3.0,4.0,Var "a"), [("a",Point(4.0,4.0))]))
 	val Point(c,d) = Point(7.0,8.0) 
 in
 	if real_equal(a,c) andalso real_equal(b,d)
-	then (print "eval_prog with 'a' in environment is working properly\n")
-	else (print "eval_prog with 'a' in environment is not working properly\n")
+	then (print "eval_prog with 'a' in environment is working properly: PASS\n")
+	else (print "eval_prog with 'a' in environment is not working properly: FAIL\n")
 end;
 
-
+(*
 (* With Variable Shadowing *)
 let 
 	val Point(a,b) = (eval_prog (Shift(3.0,4.0,Var "a"), [("a",Point(4.0,4.0)),("a",Point(1.0,1.0))]))
