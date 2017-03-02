@@ -203,7 +203,12 @@ fun eval_prog (e,env) =
 	  | Line(m,b) => Line(m,b + deltaY - m * deltaX)
 	  | VerticalLine(x) => VerticalLine(x+deltaX)
 	  | LineSegment(x1,y1,x2,y2) => LineSegment(x1+deltaX,y1+deltaY,x2+deltaX,y2+deltaY)
-	  | Var s => Shift(deltaX,deltaY, eval_prog (Var s,env))
+	  | Let(s,e1,e2) => Shift(deltaX,deltaY, eval_prog(Let(s,e1,e2),env))
+	  | Intersect(e1,e2) => Shift(deltaX,deltaY, eval_prog(Intersect(e1,e2),env))
+	  | Shift(xx,yy,e) => Shift(deltaX,deltaY, eval_prog(Shift(xx,yy,e),env))
+	  | Var(s) => Shift(deltaX,deltaY, eval_prog(Var(s),env))
+	  | _ => Point(0.0,0.0)
+				 
 
 
 fun preprocess_prog e =
