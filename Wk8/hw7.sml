@@ -212,6 +212,11 @@ fun preprocess_prog e =
       else if real_close(y1,y2) andalso x1 > x2 then LineSegment(x2,y2,x1,y1)
       else if x1 > x2 andalso y1 > y2 then LineSegment(x2,y2,x1,y1)
       else LineSegment(x1,y1,x2,y2)
+    | Var s => Var s
+    | Intersect(e1,e2) => Intersect(preprocess_prog e1, preprocess_prog e2)
+    | Let(s,e1,e2) => Let(s,preprocess_prog e1, preprocess_prog e2)
+    | Shift(deltaX,deltaY,e) => Shift(deltaX,deltaY, preprocess_prog e)  
+     
 
 				      
   

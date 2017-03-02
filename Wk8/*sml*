@@ -1931,4 +1931,341 @@ val it = () : unit
 preprocess flips an improper LineSegment successfully
 val it = () : unit
 val it = () : unit
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-214.36 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+val it = () : unit
+- 
+
+Process sml finished
+Standard ML of New Jersey v110.80 [built: Fri Aug 19 07:49:58 2016]
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+hw7.sml:204.3-215.21 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+[autoloading]
+[autoloading done]
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+hw7testsprovided.sml:63.19-63.37 Error: constructor and argument don't agree in pattern [tycon mismatch]
+  constructor: real * real -> geom_exp
+  argument:    'Z * 'Y * 'X * 'W
+  in pattern:
+    Point (y1,y2,y3,y4)
+hw7testsprovided.sml:63.38-63.56 Error: constructor and argument don't agree in pattern [tycon mismatch]
+  constructor: real * real -> geom_exp
+  argument:    'Z * 'Y * 'X * 'W
+  in pattern:
+    Point (y5,y6,y7,y8)
+val it = () : unit
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-215.21 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+pass
+val it = () : unit
+val it = () : unit
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-215.21 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+hw7testsprovided.sml:61.9-62.92 Error: operator and operand don't agree [tycon mismatch]
+  operator domain: geom_exp
+  operand:         geom_exp * geom_exp -> geom_exp
+  in expression:
+    preprocess_prog Intersect
+val it = () : unit
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-215.21 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+hw7testsprovided.sml:61.9-62.92 Error: operator and operand don't agree [tycon mismatch]
+  operator domain: geom_exp
+  operand:         geom_exp * geom_exp -> geom_exp
+  in expression:
+    preprocess_prog Intersect
+val it = () : unit
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-215.21 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+
+uncaught exception Match [nonexhaustive match failure]
+  raised at: hw7.sml:215.21
+- use "hw7testsprovided.sml";
+[opening hw7testsprovided.sml]
+[opening hw7.sml]
+hw7.sml:204.3-216.76 Warning: match nonexhaustive
+          NoPoints => ...
+          Point _ => ...
+          Line _ => ...
+          VerticalLine _ => ...
+          LineSegment (x1,y1,x2,y2) => ...
+          Var s => ...
+          Intersect (e1,e2) => ...
+  
+datatype geom_exp
+  = Intersect of geom_exp * geom_exp
+  | Let of string * geom_exp * geom_exp
+  | Line of real * real
+  | LineSegment of real * real * real * real
+  | NoPoints
+  | Point of real * real
+  | Shift of real * real * geom_exp
+  | Var of string
+  | VerticalLine of real
+exception BadProgram of string
+exception Impossible of string
+val epsilon = 1E~05 : real
+val real_close = fn : real * real -> bool
+val real_close_point = fn : real * real -> real * real -> bool
+val two_points_to_line = fn : real * real * real * real -> geom_exp
+val intersect = fn : geom_exp * geom_exp -> geom_exp
+val eval_prog = fn : geom_exp * (string * geom_exp) list -> geom_exp
+val preprocess_prog = fn : geom_exp -> geom_exp
+val it = () : unit
+val real_equal = fn : real * real -> bool
+preprocess leaves LineSegment as is
+val it = () : unit
+preprocess converts a LineSegment to a Point successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+preprocess flips an improper LineSegment successfully
+val it = () : unit
+pass
+val it = () : unit
+val it = () : unit
 - 

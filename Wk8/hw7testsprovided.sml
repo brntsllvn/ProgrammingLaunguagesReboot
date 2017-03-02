@@ -57,6 +57,17 @@ in
 	else (print "preprocess does not flip an improper LineSegment successfully\n")
 end;
 
+let 
+    val Intersect(Point(x1,x2),Point(x5,x6))
+	= preprocess_prog(Intersect(LineSegment(~3.7,1.5,~3.7,1.5),LineSegment(~3.7,1.5,~3.7,1.5))) 
+    val Intersect(Point(y1,y2),Point(y5,y6))
+	= Intersect(Point(~3.7,1.5),Point(~3.7,1.5))
+in
+	if real_equal(x1,y1) andalso real_equal(x2,y2) andalso real_equal(x5,y5) andalso real_equal(x6,y6)
+	then (print "pass\n")
+	else (print "fail\n")
+end;
+
 (*
 
 
