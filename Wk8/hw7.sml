@@ -206,8 +206,8 @@ fun eval_prog (e,env) =
 	  | Let(s,e1,e2) => Shift(deltaX,deltaY, eval_prog(Let(s,e1,e2),env))
 	  | Intersect(e1,e2) => Shift(deltaX,deltaY, eval_prog(Intersect(e1,e2),env))
 	  | Shift(xx,yy,e) => Shift(deltaX,deltaY, eval_prog(Shift(xx,yy,e),env))
-	  | Var(s) => Shift(deltaX,deltaY, eval_prog(Var(s),env))
-	  | _ => Point(0.0,0.0)
+	  (*| Var(s) => Shift(deltaX,deltaY, eval_prog(Var(s),env))*)
+	  | _ => Point(0.0,0.0) 
 				 
 
 
