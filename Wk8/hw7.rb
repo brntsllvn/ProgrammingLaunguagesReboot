@@ -148,6 +148,22 @@ class Line < GeometryValue
     @m = m
     @b = b
   end
+
+  def eval_prog env
+    self
+  end
+
+  def preprocess_prog 
+    self
+  end
+
+  def shift(delta_x,delta_y)
+    Line.new(self.m, b + delta_y - m * delta_x)
+  end
+  
+  def intersect some_line
+    self
+  end
 end
 
 class VerticalLine < GeometryValue
@@ -156,6 +172,22 @@ class VerticalLine < GeometryValue
   attr_reader :x
   def initialize x
     @x = x
+  end
+  
+  def eval_prog env
+    self
+  end
+
+  def preprocess_prog 
+    self
+  end
+
+  def shift(delta_x,delta_y)
+    VerticalLine.new(self.x + delta_x)
+  end
+  
+  def intersect some_line
+    self
   end
 end
 
@@ -171,6 +203,33 @@ class LineSegment < GeometryValue
     @y1 = y1
     @x2 = x2
     @y2 = y2
+  end
+
+  def eval_prog env
+    self
+  end
+
+  def preprocess_prog
+    swap_segment = LineSegment.new(x2,y2,x1,y1)
+    if real_close_point(x1,y1,x2,y2)
+      Point.new(x1,y1)
+    elsif real_close(x1,x2) && y1 > y2
+      swap_segment
+    elsif real_close(y1,y2) && x1 > x2
+      swap_segment
+    elsif self.x1 > x2 && y1 > y2
+      swap_segment
+    else
+      self
+    end
+  end
+
+  def shift(delta_x,delta_y)
+    LineSegment.new(x1+delta_x,y1+delta_y,x2+delta_x,y2+delta_y)
+  end
+
+  def intersect line_segment
+    self
   end
 end
 
