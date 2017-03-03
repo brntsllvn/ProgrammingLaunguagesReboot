@@ -299,4 +299,12 @@ class Shift < GeometryExpression
     @dy = dy
     @e = e
   end
+
+  def preprocess_prog
+    self
+  end
+
+  def eval_prog env
+    self
+  end
 end

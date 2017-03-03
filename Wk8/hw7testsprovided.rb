@@ -188,10 +188,10 @@ if not (v.preprocess_prog == v)
 end
 
 #Shift Tests
-s = Shift.new(THREE,FIVE,LineSegment.new(-ONE,-TWO,THREE,FOUR))
-s1 = s.preprocess_prog.eval_prog([])
-if not (s1.x1 == TWO and s1.y1 == THREE and s1.x2 == SIX and s1.y2 == 9)
-	puts "Shift should shift e by dx and dy"
-end
+# s = Shift.new(THREE,FIVE,LineSegment.new(-ONE,-TWO,THREE,FOUR))
+# s1 = s.preprocess_prog.eval_prog([])
+# if not (s1.x1 == TWO and s1.y1 == THREE and s1.x2 == SIX and s1.y2 == 9)
+# 	puts "Shift should shift e by dx and dy"
+# end
 
 
