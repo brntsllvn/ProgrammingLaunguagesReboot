@@ -118,6 +118,18 @@ class Point < GeometryValue
     @x = x
     @y = y
   end
+
+  def eval_prog env
+    self
+  end
+
+  def preprocess_prog 
+    self
+  end
+
+  def shift(delta_x,delta_y)
+    Point.new(self.x + delta_x, self.y + delta_y)
+  end
 end
 
 class Line < GeometryValue

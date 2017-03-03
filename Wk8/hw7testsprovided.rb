@@ -24,24 +24,30 @@ TEN = 10.0
 a = Point.new(THREE,FIVE)
 if not (a.x == THREE and a.y == FIVE)
 	puts "Point is not initialized properly"
+    else puts "PASS"
 end
 if not (a.eval_prog([]) == a)
 	puts "Point eval_prog should return self"
+    else puts "PASS"
 end
 if not (a.preprocess_prog == a)
 	puts "Point preprocess_prog should return self"
+    else puts "PASS"
 end
 a1 = a.shift(THREE,FIVE)
 if not (a1.x == SIX and a1.y == TEN)
 	puts "Point shift not working properly"
+    else puts "PASS"
 end
 a2 = a.intersect(Point.new(THREE,FIVE))
 if not (a2.x == THREE and a2.y == FIVE)
 	puts "Point intersect not working properly"
+    else puts "PASS"
 end 
 a3 = a.intersect(Point.new(FOUR,FIVE))
 if not (a3.is_a? NoPoints)
 	puts "Point intersect not working properly"
+    else puts "PASS"
 end
 
 #Line Tests
