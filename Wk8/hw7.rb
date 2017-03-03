@@ -130,6 +130,14 @@ class Point < GeometryValue
   def shift(delta_x,delta_y)
     Point.new(self.x + delta_x, self.y + delta_y)
   end
+
+  def intersect point
+    if real_close_point(self.x,self.y,point.x,point.y)
+      self
+    else
+      NoPoints.new
+    end 
+  end
 end
 
 class Line < GeometryValue
