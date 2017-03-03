@@ -242,6 +242,14 @@ class Intersect < GeometryExpression
     @e1 = e1
     @e2 = e2
   end
+
+  def preprocess_prog
+    self
+  end
+
+  def eval_prog env
+    self
+  end
 end
 
 class Let < GeometryExpression
@@ -252,6 +260,17 @@ class Let < GeometryExpression
     @s = s
     @e1 = e1
     @e2 = e2
+  end
+
+  def preprocess_prog
+    # what does it mean to preprocess_prog e1 below?
+    # we don't know what e1 is, so how do we call 
+    # preprocess_prog on it? 
+    self
+  end
+
+  def eval_prog env
+    self
   end
 end
 
@@ -265,6 +284,10 @@ class Var < GeometryExpression
     pr = env.assoc @s
     raise "undefined variable" if pr.nil?
     pr[1]
+  end
+
+  def preprocess_prog
+    self
   end
 end
 
