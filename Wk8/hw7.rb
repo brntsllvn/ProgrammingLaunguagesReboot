@@ -270,6 +270,10 @@ class Let < GeometryExpression
     new_env = env.unshift [@s, @e1.eval_prog(env)]
     @e2.eval_prog new_env
   end
+
+  def shift(dx,dy)
+    LineSegment.new(x1+delta_x,y1+delta_y,x2+delta_x,y2+delta_y)
+  end
 end
 
 class Var < GeometryExpression
@@ -299,10 +303,10 @@ class Shift < GeometryExpression
   end
 
   def preprocess_prog
-    self
+    Shift.new(@dx,@dy,@e.preprocess_prog)
   end
 
   def eval_prog env
-    self
+    @e.shift(@dx,@dy)
   end
 end
