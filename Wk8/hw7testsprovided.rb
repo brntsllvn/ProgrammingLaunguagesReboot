@@ -160,6 +160,13 @@ end
 # end
 
 #Let Tests
+l = Let.new("a", LineSegment.new(THREE,FOUR,-ONE,-TWO), Var.new("a"))
+l0 = l.preprocess_prog.eval_prog([])
+if not (l0.x1 == -ONE and l0.y1 == -TWO and l0.x2 == THREE and l0.y2 == FOUR)
+	puts "Let eval_prog should evaluate e2 after adding [s, e1] to the environment"
+    else puts "PASS mf"
+end
+
 # l = Let.new("a", LineSegment.new(-ONE,-TWO,THREE,FOUR),
 #              Intersect.new(Var.new("a"),LineSegment.new(THREE,FOUR,-ONE,-TWO)))
 # l1 = l.preprocess_prog.eval_prog([])

@@ -263,14 +263,12 @@ class Let < GeometryExpression
   end
 
   def preprocess_prog
-    # what does it mean to preprocess_prog e1 below?
-    # we don't know what e1 is, so how do we call 
-    # preprocess_prog on it? 
-    self
+    Let.new(@s, @e1.preprocess_prog, @e2.preprocess_prog)
   end
 
   def eval_prog env
-    self
+    new_env = env.unshift [@s, @e1.eval_prog(env)]
+    @e2.eval_prog new_env
   end
 end
 
