@@ -120,6 +120,13 @@ in
 	else (print "eval_prog with 'a' in environment is not working properly: FAIL\n")
 end;
 
+
+(* Shift(1.0,1.0,Intersect(Line(1.0,1.0),Line(1.0,0.0))) was expected to evaluate to NoPoints *)
+
+
+val x = eval_prog(Shift(1.0,1.0,Intersect(Line(1.0,1.0),Line(1.0,0.0))),[])
+
+
 (*
 (* With Variable Shadowing *)
 let 
