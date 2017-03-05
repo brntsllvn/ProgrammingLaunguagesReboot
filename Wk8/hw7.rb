@@ -131,13 +131,21 @@ class Point < GeometryValue
     Point.new(self.x + delta_x, self.y + delta_y)
   end
 
-  def intersect point
-    if real_close_point(self.x,self.y,point.x,point.y)
+  def intersect other
+      other.intersectPoint self
+  end
+
+  def intersectPoint p 
+    if real_close_point(self.x,self.y,p.x,p.y)
       self
     else
       NoPoints.new
     end 
-  end
+  end    
+
+  # def intersectLine line
+
+  # end
 end
 
 class Line < GeometryValue
@@ -161,9 +169,31 @@ class Line < GeometryValue
     Line.new(self.m, b + delta_y - m * delta_x)
   end
   
-  def intersect some_line
-    self
+  def intersect other
+    other.intersectLine self
   end
+
+  def intersectPoint p
+    if real_close(p.y, @m * p.x + @b)
+      then p
+      else NoPoints.new
+    end
+  end
+
+  def intersectLine line
+    if real_close(line.m, @m) 
+    then 
+      if real_close(line.b, @b) 
+        then line
+        else NoPoints.new
+      end
+    else 
+      px = (line.b - @b) / (@m - line.m)
+		  py = line.m * px + line.b
+		  Point.new(px,py)
+    end
+  end
+
 end
 
 class VerticalLine < GeometryValue
@@ -186,8 +216,15 @@ class VerticalLine < GeometryValue
     VerticalLine.new(self.x + delta_x)
   end
   
-  def intersect some_line
+  def intersect other
     self
+    #############################
+    # NEEDS TO BE IMPLEMENTED CORRECTLY
+    #############################
+  end
+
+  def intersectPoint p
+    if real_close(p.x,@x) then p else NoPoints.new end
   end
 end
 
@@ -231,6 +268,10 @@ class LineSegment < GeometryValue
   def intersect line_segment
     self
   end
+
+  def intersectPoint p
+    p
+  end
 end
 
 # Note: there is no need for getter methods for the non-value classes
@@ -271,9 +312,9 @@ class Let < GeometryExpression
     @e2.eval_prog new_env
   end
 
-  def shift(dx,dy)
-    LineSegment.new(x1+delta_x,y1+delta_y,x2+delta_x,y2+delta_y)
-  end
+  # def shift(dx,dy)
+    
+  # end
 end
 
 class Var < GeometryExpression

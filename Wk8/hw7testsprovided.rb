@@ -49,6 +49,31 @@ if not (a3.is_a? NoPoints)
 	puts "Point intersect not working properly"
     else puts "PASS"
 end
+a4 = a.intersect(LineSegment.new(THREE,FIVE,TEN,TEN))
+if not (a4.x == THREE and a4.y == FIVE)
+    puts "FAIL"
+    else puts "PASS"
+end
+a5 = a.intersect(Line.new(FOUR,-SEVEN))
+if not (a5.x == THREE and a5.y == FIVE)
+    puts "FAIL: point is on line"
+    else puts "PASS: found point on line"
+end
+a6 = a.intersect(Line.new(FOUR,SEVEN))
+if not (a6.is_a? NoPoints)
+	puts "Point intersect not working properly"
+    else puts "PASS: NoPoints"
+end
+a7 = a.intersect(VerticalLine.new(THREE))
+if not (a7.x == THREE and a7.y == FIVE)
+    puts "Point intersect vertical line FAIL"
+    else puts "PASS: points intersects vert line correctly"
+end
+a8 = a.intersect(VerticalLine.new(FOUR))
+if not (a8.is_a? NoPoints)
+    puts "FAIL: Point intersect vertical line"
+    else puts "PASS: point and vert line don't intersect"
+end
 
 #Line Tests
 b = Line.new(THREE,FIVE)
@@ -80,6 +105,15 @@ b3 = b.intersect(Line.new(THREE,FOUR))
 if not ((b3.is_a? NoPoints))
 	puts "Line intersect not working properly"
     else puts "PASS"
+end
+# y = THREE x + FIVE => -3x + y - 5 = 0
+# y = THREE x + SIX  => -4x + y - 6 = 0
+b4 = b.intersect(Line.new(FOUR,SIX))
+if not ((b4.is_a? Point) and b4.x == -ONE and b4.y == TWO)
+    puts b4.x
+    puts b4.y
+	puts "FAIL: Line intersect not working properly"
+    else puts "PASS...great work doing line algebra"
 end
 
 #VerticalLine Tests
@@ -167,6 +201,13 @@ if not (l0.x1 == -ONE and l0.y1 == -TWO and l0.x2 == THREE and l0.y2 == FOUR)
     else puts "PASS mf"
 end
 
+l = Let.new("a", LineSegment.new(THREE,FOUR,-ONE,-TWO), Var.new("a"))
+l0 = l.preprocess_prog.eval_prog([])
+if not (l0.x1 == -ONE and l0.y1 == -TWO and l0.x2 == THREE and l0.y2 == FOUR)
+	puts "Let eval_prog should evaluate e2 after adding [s, e1] to the environment"
+    else puts "PASS mf"
+end
+
 # l = Let.new("a", LineSegment.new(-ONE,-TWO,THREE,FOUR),
 #              Intersect.new(Var.new("a"),LineSegment.new(THREE,FOUR,-ONE,-TWO)))
 # l1 = l.preprocess_prog.eval_prog([])
@@ -202,4 +243,4 @@ if not (s1.x1 == TWO and s1.y1 == THREE and s1.x2 == SIX and s1.y2 == 9)
     else "PASS shift!?"
 end
 
-
+puts "\n\n\n"
