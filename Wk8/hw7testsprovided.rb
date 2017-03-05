@@ -76,6 +76,10 @@ if not (a8.is_a? NoPoints)
 end
 
 #Line Tests
+#Line Tests
+#Line Tests
+#Line Tests
+#Line Tests
 b = Line.new(THREE,FIVE)
 if not (b.m == THREE and b.b == FIVE)
 	puts "Line not initialized properly"
@@ -116,6 +120,19 @@ if not ((b4.is_a? Point) and b4.x == -ONE and b4.y == TWO)
     else puts "PASS...great work doing line algebra"
 end
 
+beez = Line.new(ONE,ONE)
+b5 = beez.intersect(VerticalLine.new(THREE))
+if not ((b5.is_a? Point) and b5.x == THREE and b5.y == FOUR)
+    puts b5.x
+    puts b5.y
+    puts "FAILzzzzzzzzzzzzzzzzź"
+    else puts "PASS: line and vert line...nice work"
+end
+
+#VerticalLine Tests
+#VerticalLine Tests
+#VerticalLine Tests
+#VerticalLine Tests
 #VerticalLine Tests
 c = VerticalLine.new(THREE)
 if not (c.x == THREE)
@@ -150,6 +167,28 @@ if not ((c3.is_a? NoPoints))
     else puts "PASS"
 end
 
+c4 = c.intersect(Point.new(THREE, SEVEN))
+if not ((c4.is_a? Point) and c4.x == THREE)
+	puts "VerticalLine intersect not working properly"
+    else puts "PASS"
+end
+
+c5 = c.intersect(Point.new(FOUR, SEVEN))
+if not (c5.is_a? NoPoints)
+	puts "VerticalLine intersect not working properly"
+    else puts "PASS"
+end
+
+c6 = c.intersect(Line.new(ONE, ONE))
+if not ((c6.is_a? Point) and c6.x == THREE and c6.y == FOUR)
+	puts "VerticalLine intersect not working properly"
+    else puts "PASS"
+end
+
+#LineSegment Tests
+#LineSegment Tests
+#LineSegment Tests
+#LineSegment Tests
 #LineSegment Tests
 d = LineSegment.new(ONE,TWO,-THREE,-FOUR)
 if not (d.eval_prog([]) == d)
